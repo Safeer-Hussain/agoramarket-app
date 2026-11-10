@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/database/app_database.dart';
 import '../../core/di/injection_container.dart';
 import '../../core/performance/render_latency_monitor.dart';
@@ -12,7 +13,8 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView> with SingleTickerProviderStateMixin {
+class _SplashViewState extends State<SplashView>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
@@ -30,9 +32,10 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
       CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeIn),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeIn));
 
     _animController.forward();
 
@@ -50,7 +53,10 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
     try {
       // 1. Initialize RenderLatencyMonitor timing callbacks after first frame mounts
       try {
-        final monitor = Provider.of<RenderLatencyMonitor>(context, listen: false);
+        final monitor = Provider.of<RenderLatencyMonitor>(
+          context,
+          listen: false,
+        );
         monitor.initialize();
       } catch (e) {
         debugPrint('RenderLatencyMonitor initialize warning: $e');
@@ -59,7 +65,10 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
       // 2. Safe asset pre-caching with error handling
       if (!mounted) return;
       try {
-        final monitor = Provider.of<RenderLatencyMonitor>(context, listen: false);
+        final monitor = Provider.of<RenderLatencyMonitor>(
+          context,
+          listen: false,
+        );
         await monitor.preCacheFeedAssets(context);
       } catch (e) {
         debugPrint('Asset pre-cache warning: $e');
@@ -92,7 +101,8 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 500),
-          pageBuilder: (context, animation, secondaryAnimation) => const AdaptiveScaffold(),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const AdaptiveScaffold(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
@@ -181,7 +191,9 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                       width: 160,
                       child: LinearProgressIndicator(
                         backgroundColor: colorScheme.surfaceContainerHigh,
-                        valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          colorScheme.primary,
+                        ),
                         minHeight: 2.5,
                         borderRadius: BorderRadius.circular(4),
                       ),

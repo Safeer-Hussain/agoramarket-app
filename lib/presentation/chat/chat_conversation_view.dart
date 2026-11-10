@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../domain/entities/chat_entities.dart';
 import '../chat/chat_provider.dart';
 import 'widgets/contract_proposal_card.dart';
@@ -63,7 +64,9 @@ class _ChatConversationViewState extends State<ChatConversationView> {
         child: Container(
           decoration: BoxDecoration(
             color: colorScheme.surfaceContainer,
-            border: Border(bottom: BorderSide(color: colorScheme.outlineVariant)),
+            border: Border(
+              bottom: BorderSide(color: colorScheme.outlineVariant),
+            ),
           ),
           child: SafeArea(
             child: Row(
@@ -71,7 +74,10 @@ class _ChatConversationViewState extends State<ChatConversationView> {
                 if (!widget.isPane)
                   IconButton(
                     tooltip: 'Back to conversations',
-                    icon: Icon(Icons.arrow_back_rounded, color: colorScheme.onSurface),
+                    icon: Icon(
+                      Icons.arrow_back_rounded,
+                      color: colorScheme.onSurface,
+                    ),
                     onPressed: () => Navigator.of(context).pop(),
                   )
                 else
@@ -81,7 +87,9 @@ class _ChatConversationViewState extends State<ChatConversationView> {
                     CircleAvatar(
                       radius: 18,
                       backgroundColor: colorScheme.surfaceContainerHighest,
-                      backgroundImage: AssetImage(widget.conversation.participantAvatar),
+                      backgroundImage: AssetImage(
+                        widget.conversation.participantAvatar,
+                      ),
                     ),
                     if (widget.conversation.isOnline)
                       Positioned(
@@ -93,7 +101,10 @@ class _ChatConversationViewState extends State<ChatConversationView> {
                           decoration: BoxDecoration(
                             color: colorScheme.primary,
                             shape: BoxShape.circle,
-                            border: Border.all(color: colorScheme.surface, width: 2),
+                            border: Border.all(
+                              color: colorScheme.surface,
+                              width: 2,
+                            ),
                           ),
                         ),
                       ),
@@ -126,9 +137,13 @@ class _ChatConversationViewState extends State<ChatConversationView> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.description_outlined, color: colorScheme.primary),
+                  icon: Icon(
+                    Icons.description_outlined,
+                    color: colorScheme.primary,
+                  ),
                   tooltip: 'Draft Milestone Contract',
-                  onPressed: () => SendContractModal.show(context, widget.conversation.id),
+                  onPressed: () =>
+                      SendContractModal.show(context, widget.conversation.id),
                 ),
                 const SizedBox(width: 4),
               ],
@@ -153,7 +168,10 @@ class _ChatConversationViewState extends State<ChatConversationView> {
                 if (isSystem) {
                   return Container(
                     margin: const EdgeInsets.symmetric(vertical: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.surfaceContainerHigh,
                       borderRadius: BorderRadius.circular(16),
@@ -173,8 +191,9 @@ class _ChatConversationViewState extends State<ChatConversationView> {
                 if (msg.isContract && msg.contractId != null) {
                   final offer = chatProvider.getContractOffer(msg.contractId);
                   return Column(
-                    crossAxisAlignment:
-                        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                    crossAxisAlignment: isMe
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
                     children: [
                       _buildBubble(context, msg, isMe),
                       if (offer != null) ContractProposalCard(offer: offer),
@@ -195,7 +214,10 @@ class _ChatConversationViewState extends State<ChatConversationView> {
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.surfaceContainerHigh,
                       borderRadius: BorderRadius.circular(12),
@@ -234,35 +256,51 @@ class _ChatConversationViewState extends State<ChatConversationView> {
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainer,
-                border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+                border: Border(
+                  top: BorderSide(color: colorScheme.outlineVariant),
+                ),
               ),
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.add_circle_outline_rounded, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.add_circle_outline_rounded,
+                      color: colorScheme.primary,
+                    ),
                     tooltip: 'Send Contract Proposal',
-                    onPressed: () => SendContractModal.show(context, widget.conversation.id),
+                    onPressed: () =>
+                        SendContractModal.show(context, widget.conversation.id),
                   ),
                   Expanded(
                     child: TextField(
                       controller: _textController,
-                      style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                      style: TextStyle(
+                        color: colorScheme.onSurface,
+                        fontSize: 13,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Discuss contract terms or milestones...',
                         hintStyle: TextStyle(
                           color: colorScheme.onSurfaceVariant,
                           fontSize: 13,
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
                         filled: true,
                         fillColor: colorScheme.surfaceContainerHigh,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
-                          borderSide: BorderSide(color: colorScheme.outlineVariant),
+                          borderSide: BorderSide(
+                            color: colorScheme.outlineVariant,
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
-                          borderSide: BorderSide(color: colorScheme.outlineVariant),
+                          borderSide: BorderSide(
+                            color: colorScheme.outlineVariant,
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
@@ -303,7 +341,9 @@ class _ChatConversationViewState extends State<ChatConversationView> {
           maxWidth: MediaQuery.of(context).size.width * 0.72,
         ),
         decoration: BoxDecoration(
-          color: isMe ? colorScheme.primaryContainer : colorScheme.surfaceContainerHigh,
+          color: isMe
+              ? colorScheme.primaryContainer
+              : colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(16),
             topRight: const Radius.circular(16),
@@ -317,12 +357,16 @@ class _ChatConversationViewState extends State<ChatConversationView> {
           ),
         ),
         child: Column(
-          crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          crossAxisAlignment: isMe
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
           children: [
             Text(
               msg.text,
               style: TextStyle(
-                color: isMe ? colorScheme.onPrimaryContainer : colorScheme.onSurface,
+                color: isMe
+                    ? colorScheme.onPrimaryContainer
+                    : colorScheme.onSurface,
                 fontSize: 13,
                 height: 1.3,
               ),
@@ -331,8 +375,11 @@ class _ChatConversationViewState extends State<ChatConversationView> {
             Text(
               msg.timestamp,
               style: TextStyle(
-                color: (isMe ? colorScheme.onPrimaryContainer : colorScheme.onSurfaceVariant)
-                    .withValues(alpha: 0.7),
+                color:
+                    (isMe
+                            ? colorScheme.onPrimaryContainer
+                            : colorScheme.onSurfaceVariant)
+                        .withValues(alpha: 0.7),
                 fontSize: 9,
               ),
             ),

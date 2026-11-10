@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../profile_provider.dart';
 
@@ -31,14 +32,18 @@ class _EditProfileModalState extends State<EditProfileModal> {
   @override
   void initState() {
     super.initState();
-    final profile = Provider.of<ProfileProvider>(context, listen: false).profile;
-    _nameController = TextEditingController(text: profile?.name ?? 'Safeer Hussain');
+    final profile = Provider.of<ProfileProvider>(
+      context,
+      listen: false,
+    ).profile;
+    _nameController = TextEditingController(
+      text: profile?.name ?? 'Safeer Hussain',
+    );
     _headlineController = TextEditingController(
       text: profile?.headline ?? 'Principal Mobile & Marketplace Architect',
     );
     _bioController = TextEditingController(
-      text: profile?.bio ??
-          'Architecting high-concurrency vertical video marketplaces and offline-first systems.',
+      text: profile?.bio ?? 'Architecting high-concurrency vertical video marketplaces and offline-first systems.',
     );
     _rateController = TextEditingController(
       text: profile?.hourlyRate.toStringAsFixed(0) ?? '95',
@@ -47,7 +52,9 @@ class _EditProfileModalState extends State<EditProfileModal> {
       text: profile?.location ?? 'Lahore, Pakistan (Global Remote)',
     );
     _skillsController = TextEditingController(
-      text: profile?.skills.join(', ') ?? 'Flutter, Dart, Clean Architecture, SQLite',
+      text:
+          profile?.skills.join(', ') ??
+          'Flutter, Dart, Clean Architecture, SQLite',
     );
   }
 
@@ -83,7 +90,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
     );
 
     Navigator.of(context).pop();
-    AppFeedback.showSuccess(context, 'Profile information updated successfully');
+    AppFeedback.showSuccess(
+      context,
+      'Profile information updated successfully',
+    );
   }
 
   @override
@@ -99,7 +109,9 @@ class _EditProfileModalState extends State<EditProfileModal> {
           child: Container(
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainer,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
             ),
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: Form(
@@ -141,8 +153,13 @@ class _EditProfileModalState extends State<EditProfileModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _nameController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
-                    decoration: const InputDecoration(hintText: 'Safeer Hussain'),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: 'Safeer Hussain',
+                    ),
                     validator: (v) {
                       if (v == null || v.trim().length < 3) {
                         return 'Name must be at least 3 characters';
@@ -164,7 +181,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _headlineController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Principal Mobile & Marketplace Architect',
                     ),
@@ -196,8 +216,13 @@ class _EditProfileModalState extends State<EditProfileModal> {
                             TextFormField(
                               controller: _rateController,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
-                              decoration: const InputDecoration(prefixText: '\$ '),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
+                              decoration: const InputDecoration(
+                                prefixText: '\$ ',
+                              ),
                               validator: (v) {
                                 final n = double.tryParse(v ?? '');
                                 if (n == null || n <= 0) {
@@ -225,7 +250,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
                             const SizedBox(height: 6),
                             TextFormField(
                               controller: _locationController,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
                               decoration: const InputDecoration(
                                 hintText: 'Lahore, Pakistan',
                               ),
@@ -255,7 +283,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _skillsController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Flutter, Dart, Clean Architecture, SQLite',
                     ),
@@ -281,7 +312,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
                   TextFormField(
                     controller: _bioController,
                     maxLines: 3,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Summarize your architecture achievements and offerings',
                     ),
@@ -307,7 +341,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
                         ),
                       ),
                       onPressed: _submit,
-                      child: const Text('Save Changes', style: TextStyle(fontWeight: FontWeight.w700)),
+                      child: const Text(
+                        'Save Changes',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                 ],

@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../chat/chat_inbox_view.dart';
 import '../chat/chat_provider.dart';
 import '../common/latency_hud_pill.dart';
@@ -75,7 +77,8 @@ class AdaptiveScaffoldState extends State<AdaptiveScaffold> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final chatProvider = Provider.of<ChatProvider>(context);
     final totalUnread = chatProvider.conversations.fold<int>(
       0,
@@ -97,14 +100,21 @@ class AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                 if (_isOffline)
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
                     color: colorScheme.errorContainer,
                     child: SafeArea(
                       bottom: false,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.wifi_off_rounded, size: 14, color: colorScheme.onErrorContainer),
+                          Icon(
+                            Icons.wifi_off_rounded,
+                            size: 14,
+                            color: colorScheme.onErrorContainer,
+                          ),
                           const SizedBox(width: 8),
                           Text(
                             'Offline Mode - Serving Cached Marketplace Feed & Messages',
@@ -137,43 +147,73 @@ class AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                                   onDestinationSelected: setDestination,
                                   destinations: [
                                     const NavigationRailDestination(
-                                      icon: Icon(Icons.play_circle_outline_rounded, size: 20),
-                                      selectedIcon: Icon(Icons.play_circle_rounded, size: 20),
+                                      icon: Icon(
+                                        Icons.play_circle_outline_rounded,
+                                        size: 20,
+                                      ),
+                                      selectedIcon: Icon(
+                                        Icons.play_circle_rounded,
+                                        size: 20,
+                                      ),
                                       label: Text('Feed'),
                                     ),
                                     const NavigationRailDestination(
                                       icon: Icon(Icons.map_outlined, size: 20),
-                                      selectedIcon: Icon(Icons.map_rounded, size: 20),
+                                      selectedIcon: Icon(
+                                        Icons.map_rounded,
+                                        size: 20,
+                                      ),
                                       label: Text('Map'),
                                     ),
                                     NavigationRailDestination(
                                       icon: Badge(
                                         isLabelVisible: totalUnread > 0,
                                         label: Text(totalUnread.toString()),
-                                        child: const Icon(Icons.chat_bubble_outline_rounded, size: 20),
+                                        child: const Icon(
+                                          Icons.chat_bubble_outline_rounded,
+                                          size: 20,
+                                        ),
                                       ),
                                       selectedIcon: Badge(
                                         isLabelVisible: totalUnread > 0,
                                         label: Text(totalUnread.toString()),
-                                        child: const Icon(Icons.chat_bubble_rounded, size: 20),
+                                        child: const Icon(
+                                          Icons.chat_bubble_rounded,
+                                          size: 20,
+                                        ),
                                       ),
                                       label: const Text('Messages'),
                                     ),
                                     const NavigationRailDestination(
-                                      icon: Icon(Icons.auto_awesome_outlined, size: 20),
-                                      selectedIcon: Icon(Icons.auto_awesome_rounded, size: 20),
+                                      icon: Icon(
+                                        Icons.auto_awesome_outlined,
+                                        size: 20,
+                                      ),
+                                      selectedIcon: Icon(
+                                        Icons.auto_awesome_rounded,
+                                        size: 20,
+                                      ),
                                       label: Text('AI'),
                                     ),
                                     const NavigationRailDestination(
-                                      icon: Icon(Icons.person_outline_rounded, size: 20),
-                                      selectedIcon: Icon(Icons.person_rounded, size: 20),
+                                      icon: Icon(
+                                        Icons.person_outline_rounded,
+                                        size: 20,
+                                      ),
+                                      selectedIcon: Icon(
+                                        Icons.person_rounded,
+                                        size: 20,
+                                      ),
                                       label: Text('Profile'),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                            VerticalDivider(width: 1, color: colorScheme.outlineVariant),
+                            VerticalDivider(
+                              width: 1,
+                              color: colorScheme.outlineVariant,
+                            ),
                             Expanded(
                               child: IndexedStack(
                                 index: _currentIndex,

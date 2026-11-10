@@ -116,7 +116,9 @@ class MockMarketplaceRepository implements MarketplaceRepository {
       final cur = pitches[idx];
       pitches[idx] = cur.copyWith(
         isBookmarked: !cur.isBookmarked,
-        bookmarksCount: !cur.isBookmarked ? cur.bookmarksCount + 1 : cur.bookmarksCount - 1,
+        bookmarksCount: !cur.isBookmarked
+            ? cur.bookmarksCount + 1
+            : cur.bookmarksCount - 1,
       );
     }
   }
@@ -227,7 +229,8 @@ class MockChatRepository implements ChatRepository {
   }
 
   @override
-  Future<List<ChatConversation>> getConversations() async => List.from(conversations);
+  Future<List<ChatConversation>> getConversations() async =>
+      List.from(conversations);
 
   @override
   Future<List<ChatMessage>> getMessages(String conversationId) async =>
@@ -240,7 +243,8 @@ class MockChatRepository implements ChatRepository {
   }
 
   @override
-  Future<ContractOffer?> getContractOffer(String contractId) async => contracts[contractId];
+  Future<ContractOffer?> getContractOffer(String contractId) async =>
+      contracts[contractId];
 
   @override
   Future<void> createContractOffer(ContractOffer offer) async {

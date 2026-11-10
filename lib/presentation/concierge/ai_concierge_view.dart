@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'ai_concierge_provider.dart';
 
 class AiMatchConciergeView extends StatefulWidget {
@@ -47,7 +48,8 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Consumer<AiConciergeProvider>(
       builder: (context, concierge, child) {
@@ -58,7 +60,11 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
             toolbarHeight: isLandscape ? 36 : 56,
             title: Row(
               children: [
-                Icon(Icons.auto_awesome_rounded, color: colorScheme.primary, size: 20),
+                Icon(
+                  Icons.auto_awesome_rounded,
+                  color: colorScheme.primary,
+                  size: 20,
+                ),
                 const SizedBox(width: 8),
                 Text(
                   'Smart Concierge & Pitch Analyzer',
@@ -79,7 +85,10 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
     );
   }
 
-  Widget _buildPortraitLayout(BuildContext context, AiConciergeProvider concierge) {
+  Widget _buildPortraitLayout(
+    BuildContext context,
+    AiConciergeProvider concierge,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Column(
@@ -114,9 +123,7 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
         const Divider(height: 1),
 
         // Chat stream & reasoning
-        Expanded(
-          child: _buildMessagesList(context, concierge),
-        ),
+        Expanded(child: _buildMessagesList(context, concierge)),
 
         // Bottom Input Bar
         _buildBottomInputBar(context, concierge),
@@ -124,7 +131,10 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
     );
   }
 
-  Widget _buildLandscapeLayout(BuildContext context, AiConciergeProvider concierge) {
+  Widget _buildLandscapeLayout(
+    BuildContext context,
+    AiConciergeProvider concierge,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Row(
@@ -157,11 +167,16 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: colorScheme.surfaceContainerHigh,
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: colorScheme.outlineVariant),
+                            border: Border.all(
+                              color: colorScheme.outlineVariant,
+                            ),
                           ),
                           child: Text(
                             s,
@@ -188,7 +203,11 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.memory_rounded, size: 14, color: colorScheme.secondary),
+                            Icon(
+                              Icons.memory_rounded,
+                              size: 14,
+                              color: colorScheme.secondary,
+                            ),
                             const SizedBox(width: 6),
                             Text(
                               'On-Device Synthesis',
@@ -226,9 +245,7 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
           flex: 6,
           child: Column(
             children: [
-              Expanded(
-                child: _buildMessagesList(context, concierge),
-              ),
+              Expanded(child: _buildMessagesList(context, concierge)),
               _buildBottomInputBar(context, concierge),
             ],
           ),
@@ -237,14 +254,18 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
     );
   }
 
-  Widget _buildMessagesList(BuildContext context, AiConciergeProvider concierge) {
+  Widget _buildMessagesList(
+    BuildContext context,
+    AiConciergeProvider concierge,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListView.builder(
       controller: _scrollController,
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      itemCount: concierge.messages.length +
+      itemCount:
+          concierge.messages.length +
           (concierge.reasoningText != null ? 1 : 0) +
           (concierge.currentStreamingText.isNotEmpty ? 1 : 0),
       itemBuilder: (context, idx) {
@@ -254,14 +275,17 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
         }
 
         // Active Reasoning Indicator
-        if (concierge.reasoningText != null && idx == concierge.messages.length) {
+        if (concierge.reasoningText != null &&
+            idx == concierge.messages.length) {
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 8),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: colorScheme.primary.withValues(alpha: 0.4)),
+              border: Border.all(
+                color: colorScheme.primary.withValues(alpha: 0.4),
+              ),
             ),
             child: Row(
               children: [
@@ -324,7 +348,9 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
           maxWidth: MediaQuery.of(context).size.width * 0.78,
         ),
         decoration: BoxDecoration(
-          color: isUser ? colorScheme.primaryContainer : colorScheme.surfaceContainerHigh,
+          color: isUser
+              ? colorScheme.primaryContainer
+              : colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isUser
@@ -333,7 +359,9 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
           ),
         ),
         child: Column(
-          crossAxisAlignment: isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          crossAxisAlignment: isUser
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
           children: [
             if (!isUser)
               Padding(
@@ -341,7 +369,11 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.auto_awesome_rounded, size: 14, color: colorScheme.primary),
+                    Icon(
+                      Icons.auto_awesome_rounded,
+                      size: 14,
+                      color: colorScheme.primary,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       'AgoraMarket Intelligence',
@@ -357,7 +389,9 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
             Text(
               msg.text,
               style: TextStyle(
-                color: isUser ? colorScheme.onPrimaryContainer : colorScheme.onSurface,
+                color: isUser
+                    ? colorScheme.onPrimaryContainer
+                    : colorScheme.onSurface,
                 fontSize: 13,
                 height: 1.4,
               ),
@@ -367,8 +401,11 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
               msg.timestamp,
               style: TextStyle(
                 fontSize: 9,
-                color: (isUser ? colorScheme.onPrimaryContainer : colorScheme.onSurfaceVariant)
-                    .withValues(alpha: 0.6),
+                color:
+                    (isUser
+                            ? colorScheme.onPrimaryContainer
+                            : colorScheme.onSurfaceVariant)
+                        .withValues(alpha: 0.6),
               ),
             ),
           ],
@@ -377,7 +414,10 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
     );
   }
 
-  Widget _buildBottomInputBar(BuildContext context, AiConciergeProvider concierge) {
+  Widget _buildBottomInputBar(
+    BuildContext context,
+    AiConciergeProvider concierge,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return SafeArea(
@@ -395,14 +435,18 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
                 controller: _queryController,
                 style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
                 decoration: InputDecoration(
-                  hintText: 'Ask concierge about rates, pitch scripts, or jobs...',
+                  hintText:
+                      'Ask concierge about rates, pitch scripts, or jobs...',
                   hintStyle: TextStyle(
                     color: colorScheme.onSurfaceVariant,
                     fontSize: 13,
                   ),
                   filled: true,
                   fillColor: colorScheme.surfaceContainerHigh,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: BorderSide(color: colorScheme.outlineVariant),
@@ -426,7 +470,9 @@ class _AiMatchConciergeViewState extends State<AiMatchConciergeView> {
                 backgroundColor: colorScheme.primary,
                 foregroundColor: colorScheme.onPrimary,
               ),
-              onPressed: concierge.isLoading ? null : () => _submit(_queryController.text),
+              onPressed: concierge.isLoading
+                  ? null
+                  : () => _submit(_queryController.text),
               icon: const Icon(Icons.arrow_upward_rounded, size: 20),
             ),
           ],

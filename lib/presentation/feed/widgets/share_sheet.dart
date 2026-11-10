@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../../../domain/entities/video_pitch.dart';
 
@@ -69,7 +70,10 @@ class ShareSheet extends StatelessWidget {
               subtitle: 'Extract text summary, creator profile, and contact details to clipboard',
               onTap: () {
                 Navigator.of(context).pop();
-                AppFeedback.showSuccess(context, 'Pitch summary copied to clipboard');
+                AppFeedback.showSuccess(
+                  context,
+                  'Pitch summary copied to clipboard',
+                );
               },
             ),
             const SizedBox(height: 10),
@@ -81,7 +85,10 @@ class ShareSheet extends StatelessWidget {
               subtitle: 'Boost visibility of this listing on your verified profile feed',
               onTap: () {
                 Navigator.of(context).pop();
-                AppFeedback.showSuccess(context, 'Pitch reposted to marketplace feed');
+                AppFeedback.showSuccess(
+                  context,
+                  'Pitch reposted to marketplace feed',
+                );
               },
             ),
             const SizedBox(height: 10),
@@ -93,7 +100,10 @@ class ShareSheet extends StatelessWidget {
               subtitle: 'Generate high-resolution PNG job credential card',
               onTap: () {
                 Navigator.of(context).pop();
-                AppFeedback.showSuccess(context, 'Job card exported successfully');
+                AppFeedback.showSuccess(
+                  context,
+                  'Job card exported successfully',
+                );
               },
             ),
           ],
@@ -157,7 +167,11 @@ class ShareSheet extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(Icons.chevron_right_rounded, size: 18, color: colorScheme.outline),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 18,
+                color: colorScheme.outline,
+              ),
             ],
           ),
         ),

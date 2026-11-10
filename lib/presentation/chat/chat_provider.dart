@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+
 import '../../domain/entities/chat_entities.dart';
 import '../../domain/repositories/chat_repository.dart';
 
@@ -41,10 +43,12 @@ class ChatProvider extends ChangeNotifier {
     if (_searchFilter.trim().isEmpty) return _conversations;
     final q = _searchFilter.toLowerCase();
     return _conversations
-        .where((c) =>
-            c.participantName.toLowerCase().contains(q) ||
-            c.role.toLowerCase().contains(q) ||
-            c.lastMessage.toLowerCase().contains(q))
+        .where(
+          (c) =>
+              c.participantName.toLowerCase().contains(q) ||
+              c.role.toLowerCase().contains(q) ||
+              c.lastMessage.toLowerCase().contains(q),
+        )
         .toList();
   }
 
@@ -176,7 +180,11 @@ class ChatProvider extends ChangeNotifier {
     if (_activeConversationId == conversationId) {
       _messages.add(newMsg);
     }
-    _updateLastConversationMessage(conversationId, 'Contract Proposal: $title', nowStr);
+    _updateLastConversationMessage(
+      conversationId,
+      'Contract Proposal: $title',
+      nowStr,
+    );
     notifyListeners();
 
     await repository.sendMessage(newMsg);
@@ -208,7 +216,11 @@ class ChatProvider extends ChangeNotifier {
     }
   }
 
-  void _updateLastConversationMessage(String conversationId, String text, String time) {
+  void _updateLastConversationMessage(
+    String conversationId,
+    String text,
+    String time,
+  ) {
     final idx = _conversations.indexWhere((c) => c.id == conversationId);
     if (idx != -1) {
       _conversations[idx] = _conversations[idx].copyWith(
@@ -227,7 +239,8 @@ class ChatProvider extends ChangeNotifier {
       try {
         if (_activeConversationId != conversationId) return;
 
-        final replyText = 'Acknowledged. Reviewing the contract requirements and schedule now.';
+        final replyText =
+            'Acknowledged. Reviewing the contract requirements and schedule now.';
         final nowStr = 'Just now';
         final peerMsg = ChatMessage(
           id: 'msg_${_uuid.v4()}',

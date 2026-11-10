@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../../core/database/app_database.dart';
 
 class ConciergeMessage {
@@ -27,7 +29,8 @@ class AiConciergeProvider extends ChangeNotifier {
   String _currentStreamingText = '';
   bool _disposed = false;
 
-  AiConciergeProvider({AppDatabase? database}) : _database = database ?? AppDatabase() {
+  AiConciergeProvider({AppDatabase? database})
+    : _database = database ?? AppDatabase() {
     _initWelcome();
   }
 
@@ -53,8 +56,7 @@ class AiConciergeProvider extends ChangeNotifier {
     _messages.add(
       ConciergeMessage(
         id: 'msg_welcome',
-        text:
-            'Welcome to the AgoraMarket Smart Concierge. I analyze your SQLite marketplace pitches, active contracts, and local Lahore / remote rates in real-time.\n\nTap a quick shortcut below or ask any technical consultation question.',
+        text: 'Welcome to the AgoraMarket Smart Concierge. I analyze your SQLite marketplace pitches, active contracts, and local Lahore / remote rates in real-time.\n\nTap a quick shortcut below or ask any technical consultation question.',
         isUser: false,
         timestamp: 'Ready',
       ),
@@ -76,7 +78,8 @@ class AiConciergeProvider extends ChangeNotifier {
     notifyListeners();
 
     _isLoading = true;
-    _reasoningText = 'Evaluating local market rates & video engagement telemetry...';
+    _reasoningText =
+        'Evaluating local market rates & video engagement telemetry...';
     _currentStreamingText = '';
     notifyListeners();
 
@@ -87,7 +90,8 @@ class AiConciergeProvider extends ChangeNotifier {
 
       await Future.delayed(const Duration(milliseconds: 650));
       if (_disposed) return;
-      _reasoningText = 'Synthesizing benchmark telemetry across ${pitches.length} marketplace listings and ${contracts.length} escrow contracts...';
+      _reasoningText =
+          'Synthesizing benchmark telemetry across ${pitches.length} marketplace listings and ${contracts.length} escrow contracts...';
       notifyListeners();
 
       await Future.delayed(const Duration(milliseconds: 550));
@@ -135,7 +139,9 @@ class AiConciergeProvider extends ChangeNotifier {
       return 'Marketplace Benchmark Analysis:\n- Your Profile Base: \$95.00/hr (USD) ~ PKR 26,450/hr\n- Lahore Gulberg/DHA Senior Flutter Median: \$65.00 - \$85.00/hr\n- US/EU Remote Principal Architecture Median: \$90.00 - \$120.00/hr\n\nVerdict: Your current rate of \$95/hr sits at the top 8th percentile of regional talent, but matches global remote enterprise contracts perfectly given your 120 FPS custom canvas and sub-second caching specializations.';
     }
 
-    if (q.contains('counter') || q.contains('offer') || q.contains('contract')) {
+    if (q.contains('counter') ||
+        q.contains('offer') ||
+        q.contains('contract')) {
       return 'Recommended Counter-Offer Template:\n"Thank you for the project proposal. Reviewing the 14-day timeline against our performance acceptance tests (sub-8ms frame latency and full SQLite indexing), we can deliver under two milestone phases:\n- Milestone 1 (\$2,200): Core Engine & Local Spatial Index (7 Days)\n- Milestone 2 (\$1,800): Real-Time Negotiation Protocol & CI/CD Pipeline (7 Days)\n\nThis safeguards deliverable quality with zero schedule slippage."';
     }
 

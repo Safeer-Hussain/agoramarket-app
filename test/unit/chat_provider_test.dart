@@ -1,5 +1,6 @@
 import 'package:agora_market_app/presentation/chat/chat_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../mocks/mock_repositories.dart';
 
 void main() {
@@ -19,38 +20,51 @@ void main() {
       expect(provider.messages.length, 2);
     });
 
-    test('sendTextMessage adds message and updates conversation preview', () async {
-      await provider.loadConversations();
-      final initialCount = provider.messages.length;
+    test(
+      'sendTextMessage adds message and updates conversation preview',
+      () async {
+        await provider.loadConversations();
+        final initialCount = provider.messages.length;
 
-      await provider.sendTextMessage('Let us finalize the contract terms.');
-      expect(provider.messages.length, initialCount + 1);
-      expect(provider.messages.last.text, 'Let us finalize the contract terms.');
-      expect(provider.activeConversation?.lastMessage, 'Let us finalize the contract terms.');
-    });
+        await provider.sendTextMessage('Let us finalize the contract terms.');
+        expect(provider.messages.length, initialCount + 1);
+        expect(
+          provider.messages.last.text,
+          'Let us finalize the contract terms.',
+        );
+        expect(
+          provider.activeConversation?.lastMessage,
+          'Let us finalize the contract terms.',
+        );
+      },
+    );
 
-    test('sendContractOffer creates structured contract proposal in pending state', () async {
-      await provider.loadConversations();
+    test(
+      'sendContractOffer creates structured contract proposal in pending state',
+      () async {
+        await provider.loadConversations();
 
-      await provider.sendContractOffer(
-        conversationId: 'conv_01',
-        title: 'Phase 2: Custom Canvas Video Engine',
-        budget: 4200.0,
-        currency: 'USD',
-        deliveryDays: 14,
-        terms: 'Complete sub-8ms rendering implementation with test coverage.',
-      );
+        await provider.sendContractOffer(
+          conversationId: 'conv_01',
+          title: 'Phase 2: Custom Canvas Video Engine',
+          budget: 4200.0,
+          currency: 'USD',
+          deliveryDays: 14,
+          terms:
+              'Complete sub-8ms rendering implementation with test coverage.',
+        );
 
-      final contractMsg = provider.messages.last;
-      expect(contractMsg.isContract, true);
-      expect(contractMsg.contractId != null, true);
+        final contractMsg = provider.messages.last;
+        expect(contractMsg.isContract, true);
+        expect(contractMsg.contractId != null, true);
 
-      final offer = provider.getContractOffer(contractMsg.contractId);
-      expect(offer != null, true);
-      expect(offer?.title, 'Phase 2: Custom Canvas Video Engine');
-      expect(offer?.budget, 4200.0);
-      expect(offer?.status, 'PENDING');
-    });
+        final offer = provider.getContractOffer(contractMsg.contractId);
+        expect(offer != null, true);
+        expect(offer?.title, 'Phase 2: Custom Canvas Video Engine');
+        expect(offer?.budget, 4200.0);
+        expect(offer?.status, 'PENDING');
+      },
+    );
 
     test('updateContractStatus mutates contract status to ACCEPTED', () async {
       await provider.loadConversations();
@@ -64,16 +78,19 @@ void main() {
       expect(updatedOffer?.status, 'ACCEPTED');
     });
 
-    test('isTyping indicator simulation resets cleanly inside try-finally', () async {
-      await provider.loadConversations();
-      expect(provider.isTyping, false);
+    test(
+      'isTyping indicator simulation resets cleanly inside try-finally',
+      () async {
+        await provider.loadConversations();
+        expect(provider.isTyping, false);
 
-      await provider.sendTextMessage('Inquiry test message');
-      expect(provider.isTyping, true);
+        await provider.sendTextMessage('Inquiry test message');
+        expect(provider.isTyping, true);
 
-      // Wait for timer to complete and execute finally block
-      await Future.delayed(const Duration(milliseconds: 1600));
-      expect(provider.isTyping, false);
-    });
+        // Wait for timer to complete and execute finally block
+        await Future.delayed(const Duration(milliseconds: 1600));
+        expect(provider.isTyping, false);
+      },
+    );
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../../../domain/entities/video_pitch.dart';
 import '../../chat/chat_provider.dart';
@@ -34,8 +35,7 @@ class _HireModalState extends State<HireModal> {
     super.initState();
     _titleController.text = 'Contract: ${widget.pitch.title}';
     _budgetController.text = (widget.pitch.hourlyRate * 40).toStringAsFixed(0);
-    _termsController.text =
-        'Full architecture implementation, clean unit tests, 120 FPS performance verification, and handover documentation.';
+    _termsController.text = 'Full architecture implementation, clean unit tests, 120 FPS performance verification, and handover documentation.';
   }
 
   @override
@@ -85,7 +85,9 @@ class _HireModalState extends State<HireModal> {
           child: Container(
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainer,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
             ),
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: Form(
@@ -151,7 +153,10 @@ class _HireModalState extends State<HireModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _titleController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Enter specific project deliverable title',
                     ),
@@ -183,7 +188,10 @@ class _HireModalState extends State<HireModal> {
                             TextFormField(
                               controller: _budgetController,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
                               decoration: const InputDecoration(
                                 hintText: '3800',
                                 prefixText: '\$ ',
@@ -216,7 +224,10 @@ class _HireModalState extends State<HireModal> {
                             TextFormField(
                               controller: _daysController,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
                               decoration: const InputDecoration(
                                 hintText: '14',
                                 suffixText: 'days',
@@ -249,9 +260,13 @@ class _HireModalState extends State<HireModal> {
                   TextFormField(
                     controller: _termsController,
                     maxLines: 3,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
-                      hintText: 'Describe scope, acceptance tests, and milestones',
+                      hintText:
+                          'Describe scope, acceptance tests, and milestones',
                     ),
                     validator: (v) {
                       if (v == null || v.trim().length < 15) {

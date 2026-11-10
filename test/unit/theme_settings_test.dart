@@ -4,6 +4,7 @@ import 'package:agora_market_app/presentation/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../mocks/mock_repositories.dart';
 
 void main() {
@@ -17,18 +18,21 @@ void main() {
       prefs = await SharedPreferences.getInstance();
     });
 
-    test('ThemeProvider toggles mode and persists to SharedPreferences', () async {
-      final themeProvider = ThemeProvider(prefs: prefs);
-      expect(themeProvider.themeMode, ThemeMode.dark);
+    test(
+      'ThemeProvider toggles mode and persists to SharedPreferences',
+      () async {
+        final themeProvider = ThemeProvider(prefs: prefs);
+        expect(themeProvider.themeMode, ThemeMode.dark);
 
-      await themeProvider.toggleTheme();
-      expect(themeProvider.themeMode, ThemeMode.light);
-      expect(prefs.getString(AppConstants.prefThemeMode), 'light');
+        await themeProvider.toggleTheme();
+        expect(themeProvider.themeMode, ThemeMode.light);
+        expect(prefs.getString(AppConstants.prefThemeMode), 'light');
 
-      await themeProvider.toggleTheme();
-      expect(themeProvider.themeMode, ThemeMode.dark);
-      expect(prefs.getString(AppConstants.prefThemeMode), 'dark');
-    });
+        await themeProvider.toggleTheme();
+        expect(themeProvider.themeMode, ThemeMode.dark);
+        expect(prefs.getString(AppConstants.prefThemeMode), 'dark');
+      },
+    );
 
     test('ProfileProvider toggles currency USD/PKR and persists', () async {
       final mockProfileRepo = MockProfileRepository();

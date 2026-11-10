@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+
 import '../../domain/entities/video_pitch.dart';
 import '../../domain/entities/comment.dart';
 import '../../domain/repositories/marketplace_repository.dart';
@@ -43,7 +44,8 @@ class VideoFeedProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   int get currentIndex => _currentIndex;
-  VideoPitch? get currentPitch => _pitches.isNotEmpty && _currentIndex < _pitches.length
+  VideoPitch? get currentPitch =>
+      _pitches.isNotEmpty && _currentIndex < _pitches.length
       ? _pitches[_currentIndex]
       : null;
 
@@ -52,7 +54,8 @@ class VideoFeedProvider extends ChangeNotifier {
   double get playbackSpeed => _playbackSpeed;
   double get playbackProgress => _playbackProgress;
 
-  List<Comment> getCommentsForPitch(String pitchId) => _commentsCache[pitchId] ?? [];
+  List<Comment> getCommentsForPitch(String pitchId) =>
+      _commentsCache[pitchId] ?? [];
 
   void setIndex(int index) {
     if (_currentIndex == index) return;
@@ -131,7 +134,9 @@ class VideoFeedProvider extends ChangeNotifier {
 
     final target = _pitches[idx];
     final newIsBookmarked = !target.isBookmarked;
-    final newCount = newIsBookmarked ? target.bookmarksCount + 1 : target.bookmarksCount - 1;
+    final newCount = newIsBookmarked
+        ? target.bookmarksCount + 1
+        : target.bookmarksCount - 1;
 
     _pitches[idx] = target.copyWith(
       isBookmarked: newIsBookmarked,

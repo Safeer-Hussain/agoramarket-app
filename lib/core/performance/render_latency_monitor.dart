@@ -49,7 +49,9 @@ class RenderLatencyMonitor extends ChangeNotifier {
 
     if (_frameDurationsMs.isNotEmpty) {
       final sum = _frameDurationsMs.reduce((a, b) => a + b);
-      _averageMs = double.parse((sum / _frameDurationsMs.length).toStringAsFixed(1));
+      _averageMs = double.parse(
+        (sum / _frameDurationsMs.length).toStringAsFixed(1),
+      );
     }
     notifyListeners();
   }

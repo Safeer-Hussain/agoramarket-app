@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../domain/entities/video_pitch.dart';
 import '../video_feed_provider.dart';
 import 'comment_sheet.dart';
@@ -52,7 +53,9 @@ class VideoOverlayHud extends StatelessWidget {
                                 fontSize: 14,
                                 shadows: [
                                   Shadow(
-                                    color: colorScheme.shadow.withValues(alpha: 0.6),
+                                    color: colorScheme.shadow.withValues(
+                                      alpha: 0.6,
+                                    ),
                                     blurRadius: 4,
                                   ),
                                 ],
@@ -70,7 +73,10 @@ class VideoOverlayHud extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(6),
@@ -114,9 +120,14 @@ class VideoOverlayHud extends StatelessWidget {
                   runSpacing: 4,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
-                        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                        color: colorScheme.surfaceContainerHighest.withValues(
+                          alpha: 0.8,
+                        ),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: colorScheme.outlineVariant,
@@ -126,7 +137,11 @@ class VideoOverlayHud extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.payments_outlined, size: 12, color: colorScheme.secondary),
+                          Icon(
+                            Icons.payments_outlined,
+                            size: 12,
+                            color: colorScheme.secondary,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             '\$${pitch.hourlyRate.toStringAsFixed(0)}/hr',
@@ -140,9 +155,14 @@ class VideoOverlayHud extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
-                        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                        color: colorScheme.surfaceContainerHighest.withValues(
+                          alpha: 0.8,
+                        ),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: colorScheme.outlineVariant,
@@ -152,7 +172,11 @@ class VideoOverlayHud extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.location_on_outlined, size: 12, color: colorScheme.primary),
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 12,
+                            color: colorScheme.primary,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             pitch.locationName,
@@ -176,9 +200,14 @@ class VideoOverlayHud extends StatelessWidget {
                     children: pitch.skills.take(3).map((s) {
                       return Container(
                         margin: const EdgeInsets.only(right: 6),
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 7,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
-                          color: colorScheme.surfaceContainerHigh.withValues(alpha: 0.7),
+                          color: colorScheme.surfaceContainerHigh.withValues(
+                            alpha: 0.7,
+                          ),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -204,8 +233,12 @@ class VideoOverlayHud extends StatelessWidget {
             children: [
               // Like Button
               _ActionButton(
-                icon: pitch.isLiked ? Icons.favorite_rounded : Icons.favorite_outline_rounded,
-                iconColor: pitch.isLiked ? colorScheme.error : colorScheme.onSurface,
+                icon: pitch.isLiked
+                    ? Icons.favorite_rounded
+                    : Icons.favorite_outline_rounded,
+                iconColor: pitch.isLiked
+                    ? colorScheme.error
+                    : colorScheme.onSurface,
                 label: pitch.likesCount.toString(),
                 semanticLabel: pitch.isLiked
                     ? 'Unlike pitch. Current likes: ${pitch.likesCount}'
@@ -216,8 +249,12 @@ class VideoOverlayHud extends StatelessWidget {
 
               // Bookmark Button
               _ActionButton(
-                icon: pitch.isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
-                iconColor: pitch.isBookmarked ? colorScheme.tertiary : colorScheme.onSurface,
+                icon: pitch.isBookmarked
+                    ? Icons.bookmark_rounded
+                    : Icons.bookmark_outline_rounded,
+                iconColor: pitch.isBookmarked
+                    ? colorScheme.tertiary
+                    : colorScheme.onSurface,
                 label: pitch.bookmarksCount.toString(),
                 semanticLabel: pitch.isBookmarked
                     ? 'Remove bookmark. Current bookmarks: ${pitch.bookmarksCount}'
@@ -254,8 +291,14 @@ class VideoOverlayHud extends StatelessWidget {
                   onTap: () => HireModal.show(context, pitch),
                   borderRadius: BorderRadius.circular(24),
                   child: Container(
-                    constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.primary,
                       borderRadius: BorderRadius.circular(20),
@@ -270,7 +313,11 @@ class VideoOverlayHud extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.handshake_outlined, size: 14, color: colorScheme.onPrimary),
+                        Icon(
+                          Icons.handshake_outlined,
+                          size: 14,
+                          color: colorScheme.onPrimary,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           'Hire',
@@ -327,9 +374,13 @@ class _ActionButton extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.7,
+                  ),
                   shape: BoxShape.circle,
-                  border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+                  border: Border.all(
+                    color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                  ),
                 ),
                 child: Icon(icon, size: 22, color: iconColor),
               ),

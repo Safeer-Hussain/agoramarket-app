@@ -5,7 +5,8 @@ import '../../domain/repositories/chat_repository.dart';
 class ChatRepositoryImpl implements ChatRepository {
   final AppDatabase _database;
 
-  ChatRepositoryImpl({AppDatabase? database}) : _database = database ?? AppDatabase();
+  ChatRepositoryImpl({AppDatabase? database})
+    : _database = database ?? AppDatabase();
 
   @override
   Future<List<ChatConversation>> getConversations() async {
@@ -35,7 +36,9 @@ class ChatRepositoryImpl implements ChatRepository {
     await db.update(
       'chat_conversations',
       {
-        'last_message': message.isContract ? 'Contract Proposal Sent' : message.text,
+        'last_message': message.isContract
+            ? 'Contract Proposal Sent'
+            : message.text,
         'last_message_time': message.timestamp,
       },
       where: 'id = ?',

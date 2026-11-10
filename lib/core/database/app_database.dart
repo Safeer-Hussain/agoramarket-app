@@ -1,8 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import '../constants/app_constants.dart';
 
 class AppDatabase {
@@ -162,16 +164,14 @@ class AppDatabase {
       'id': 'user_safeer_001',
       'name': 'Safeer Hussain',
       'headline': 'Principal Mobile & Marketplace Architect',
-      'bio':
-          'Architecting high-concurrency vertical video marketplaces, low-latency client-side frame engines, and offline-first mobile applications.',
+      'bio': 'Architecting high-concurrency vertical video marketplaces, low-latency client-side frame engines, and offline-first mobile applications.',
       'hourly_rate': 95.0,
       'currency': 'USD',
       'location': 'Lahore, Pakistan (Global Remote)',
       'is_available': 1,
       'rating': 4.98,
       'reviews_count': 42,
-      'skills':
-          'Flutter,Dart,Clean Architecture,High-Throughput WebSockets,SQLite,Offline Sync,Custom Canvas,Micro-Frontends',
+      'skills': 'Flutter,Dart,Clean Architecture,High-Throughput WebSockets,SQLite,Offline Sync,Custom Canvas,Micro-Frontends',
       'completed_contracts': 38,
       'avatar_asset': 'assets/images/avatar_safeer.png',
     });
@@ -181,8 +181,7 @@ class AppDatabase {
       {
         'id': 'port_001',
         'title': 'Sub-Second Video Reel Pipeline',
-        'description':
-            'Engineered custom canvas multi-threaded video scrubber achieving 120 FPS render telemetry with zero drop frames.',
+        'description': 'Engineered custom canvas multi-threaded video scrubber achieving 120 FPS render telemetry with zero drop frames.',
         'category': 'Architecture',
         'metric': 'Sub-8ms frame time',
         'thumbnail_asset': 'assets/images/thumb_mobile_arch.png',
@@ -190,8 +189,7 @@ class AppDatabase {
       {
         'id': 'port_002',
         'title': 'Offline-First Spatial Mapping Engine',
-        'description':
-            'Vector bounding box spatial cluster index on SQLite enabling offline radius search across 100,000 coordinates.',
+        'description': 'Vector bounding box spatial cluster index on SQLite enabling offline radius search across 100,000 coordinates.',
         'category': 'Mobile GIS',
         'metric': '100% offline query',
         'thumbnail_asset': 'assets/images/thumb_cloud_devops.png',
@@ -199,8 +197,7 @@ class AppDatabase {
       {
         'id': 'port_003',
         'title': 'Autonomous Real-Time Contract Protocol',
-        'description':
-            'Structured milestone escrow negotiation protocol embedded directly within client-side encrypted chat streams.',
+        'description': 'Structured milestone escrow negotiation protocol embedded directly within client-side encrypted chat streams.',
         'category': 'Fintech',
         'metric': 'Zero-dispute delivery',
         'thumbnail_asset': 'assets/images/thumb_ai_automation.png',
@@ -230,8 +227,7 @@ class AppDatabase {
         'bookmarks_count': 612,
         'is_liked': 1,
         'is_bookmarked': 1,
-        'pitch_script':
-            'In this 60-second pitch, I walk through how we eliminated frame stutter in vertical video feeds using ahead-of-time bitmap pre-caching, isolator-driven decompression, and custom canvas telemetry.',
+        'pitch_script': 'In this 60-second pitch, I walk through how we eliminated frame stutter in vertical video feeds using ahead-of-time bitmap pre-caching, isolator-driven decompression, and custom canvas telemetry.',
         'skills': 'Flutter,Dart,Performance,Custom Canvas,Clean Architecture',
         'created_at': now,
       },
@@ -253,14 +249,14 @@ class AppDatabase {
         'bookmarks_count': 415,
         'is_liked': 0,
         'is_bookmarked': 0,
-        'pitch_script':
-            'Consolidated 400+ fragmented UI components into a strict WCAG-compliant design token system reducing sprint cycle design friction by 40%.',
+        'pitch_script': 'Consolidated 400+ fragmented UI components into a strict WCAG-compliant design token system reducing sprint cycle design friction by 40%.',
         'skills': 'Figma,Design Systems,Tokens,Fintech UX,Prototyping',
         'created_at': now,
       },
       {
         'id': 'pitch_003',
-        'title': 'Zero-Downtime Multi-Region Kubernetes & Infrastructure as Code',
+        'title':
+            'Zero-Downtime Multi-Region Kubernetes & Infrastructure as Code',
         'creator_name': 'Bilal Tariq',
         'creator_avatar': 'assets/images/avatar_bilal.png',
         'role': 'Staff Cloud DevOps Specialist',
@@ -276,8 +272,7 @@ class AppDatabase {
         'bookmarks_count': 534,
         'is_liked': 0,
         'is_bookmarked': 1,
-        'pitch_script':
-            'Showcasing automated Terraform and ArgoCD GitOps pipelines handling 50k requests per second with automatic multi-zone failover.',
+        'pitch_script': 'Showcasing automated Terraform and ArgoCD GitOps pipelines handling 50k requests per second with automatic multi-zone failover.',
         'skills': 'Kubernetes,Terraform,AWS,CI/CD,Observability',
         'created_at': now,
       },
@@ -299,8 +294,7 @@ class AppDatabase {
         'bookmarks_count': 1088,
         'is_liked': 1,
         'is_bookmarked': 0,
-        'pitch_script':
-            'Demonstrating strict type-safe structured JSON extraction and multi-agent coordination with local embedding search and verification gates.',
+        'pitch_script': 'Demonstrating strict type-safe structured JSON extraction and multi-agent coordination with local embedding search and verification gates.',
         'skills': 'LLM,Python,Agents,Vector Search,Prompt Engineering',
         'created_at': now,
       },
@@ -325,7 +319,8 @@ class AppDatabase {
         'pitch_id': 'pitch_001',
         'author_name': 'Maryam Noor',
         'author_avatar': 'assets/images/avatar_ayesha.png',
-        'content': 'Sent a contract proposal for our upcoming marketplace revamp.',
+        'content':
+            'Sent a contract proposal for our upcoming marketplace revamp.',
         'created_at': now,
       },
     ];
@@ -340,7 +335,8 @@ class AppDatabase {
         'participant_name': 'Ayesha Khan',
         'participant_avatar': 'assets/images/avatar_ayesha.png',
         'role': 'Lead Product & UX Designer',
-        'last_message': 'I have reviewed your proposal milestones. Ready to proceed.',
+        'last_message':
+            'I have reviewed your proposal milestones. Ready to proceed.',
         'last_message_time': '10:42 AM',
         'unread_count': 1,
         'is_online': 1,
@@ -350,7 +346,8 @@ class AppDatabase {
         'participant_name': 'Bilal Tariq',
         'participant_avatar': 'assets/images/avatar_bilal.png',
         'role': 'Staff Cloud DevOps Specialist',
-        'last_message': 'DevOps cluster deployment is primed for staging tests.',
+        'last_message':
+            'DevOps cluster deployment is primed for staging tests.',
         'last_message_time': 'Yesterday',
         'unread_count': 0,
         'is_online': 0,
@@ -380,8 +377,7 @@ class AppDatabase {
       'currency': 'USD',
       'delivery_days': 14,
       'status': 'PENDING',
-      'terms':
-          'Delivery of responsive two-pane adaptive layouts, custom canvas video scrubber, and full dark-mode parity.',
+      'terms': 'Delivery of responsive two-pane adaptive layouts, custom canvas video scrubber, and full dark-mode parity.',
       'created_at': now,
     });
 
@@ -411,7 +407,8 @@ class AppDatabase {
         'conversation_id': 'conv_ayesha',
         'sender_id': 'safeer',
         'sender_name': 'Safeer Hussain',
-        'text': 'Here is the formal project milestone proposal for your review:',
+        'text':
+            'Here is the formal project milestone proposal for your review:',
         'timestamp': '10:35 AM',
         'is_contract': 1,
         'contract_id': contractId,

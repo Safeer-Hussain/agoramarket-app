@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/performance/render_latency_monitor.dart';
 
 class PerformanceAnalyticsCard extends StatelessWidget {
@@ -24,7 +25,11 @@ class PerformanceAnalyticsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.insights_rounded, size: 16, color: colorScheme.primary),
+              Icon(
+                Icons.insights_rounded,
+                size: 16,
+                color: colorScheme.primary,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -113,7 +118,15 @@ class PerformanceAnalyticsCard extends StatelessWidget {
                       reservedSize: 18,
                       interval: 1,
                       getTitlesWidget: (value, meta) {
-                        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                        const days = [
+                          'Mon',
+                          'Tue',
+                          'Wed',
+                          'Thu',
+                          'Fri',
+                          'Sat',
+                          'Sun',
+                        ];
                         final idx = value.toInt();
                         if (idx >= 0 && idx < days.length) {
                           return Text(
@@ -185,8 +198,14 @@ class PerformanceAnalyticsCard extends StatelessWidget {
             spacing: 12,
             runSpacing: 4,
             children: [
-              _buildLegend(color: colorScheme.primary, label: 'Pitch Views / Conversions'),
-              _buildLegend(color: colorScheme.secondary, label: 'Render Latency (ms)'),
+              _buildLegend(
+                color: colorScheme.primary,
+                label: 'Pitch Views / Conversions',
+              ),
+              _buildLegend(
+                color: colorScheme.secondary,
+                label: 'Render Latency (ms)',
+              ),
             ],
           ),
         ],
@@ -198,9 +217,16 @@ class PerformanceAnalyticsCard extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+        ),
       ],
     );
   }

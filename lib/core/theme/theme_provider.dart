@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constants/app_constants.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -40,7 +41,9 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   Future<void> toggleTheme() async {
-    _themeMode = (_themeMode == ThemeMode.dark) ? ThemeMode.light : ThemeMode.dark;
+    _themeMode = (_themeMode == ThemeMode.dark)
+        ? ThemeMode.light
+        : ThemeMode.dark;
     notifyListeners();
     final localPrefs = prefs;
     if (localPrefs != null) {

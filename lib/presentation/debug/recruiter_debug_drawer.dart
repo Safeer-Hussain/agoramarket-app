@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/database/app_database.dart';
 import '../../core/performance/render_latency_monitor.dart';
@@ -39,7 +40,8 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
     final prefs = await SharedPreferences.getInstance();
     if (!mounted) return;
     setState(() {
-      _latency = (prefs.getInt(AppConstants.prefSimulatedLatency) ?? 500).toDouble();
+      _latency = (prefs.getInt(AppConstants.prefSimulatedLatency) ?? 500)
+          .toDouble();
       _force503 = prefs.getBool(AppConstants.prefForce503) ?? false;
     });
   }
@@ -78,7 +80,9 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
 
   void _simulateIncomingChat() {
     final chat = Provider.of<ChatProvider>(context, listen: false);
-    chat.sendTextMessage('Simulated recruiter ping: Urgent contract role open for Senior Architect');
+    chat.sendTextMessage(
+      'Simulated recruiter ping: Urgent contract role open for Senior Architect',
+    );
     AppFeedback.showInfo(context, 'Simulated incoming message queued');
   }
 
@@ -112,7 +116,11 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.developer_mode_rounded, size: 20, color: colorScheme.primary),
+                  Icon(
+                    Icons.developer_mode_rounded,
+                    size: 20,
+                    color: colorScheme.primary,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Recruiter & Senior Architect Debug Console',
@@ -127,7 +135,10 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
               const SizedBox(height: 4),
               Text(
                 'Live fault injection, performance telemetry, and local SQLite state controls.',
-                style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 20),
 
@@ -144,7 +155,10 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
                 ),
                 subtitle: Text(
                   'Sub-8ms 120 FPS live overlay in top-right corner',
-                  style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 value: monitor.showHudPill,
                 activeThumbColor: colorScheme.primary,
@@ -197,7 +211,10 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
                 ),
                 subtitle: Text(
                   'Tests offline resilient UI fallbacks and error banners',
-                  style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 value: _force503,
                 activeThumbColor: colorScheme.error,
@@ -208,7 +225,10 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
               // Trigger Simulated Message
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: Icon(Icons.mark_chat_unread_outlined, color: colorScheme.primary),
+                leading: Icon(
+                  Icons.mark_chat_unread_outlined,
+                  color: colorScheme.primary,
+                ),
                 title: Text(
                   'Simulate Inbound Recruiter Proposal',
                   style: TextStyle(
@@ -219,7 +239,10 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
                 ),
                 subtitle: Text(
                   'Queues simulated incoming message into active chat thread',
-                  style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 trailing: FilledButton.tonal(
                   onPressed: _simulateIncomingChat,
@@ -231,7 +254,10 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
               // Reset SQLite Database
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: Icon(Icons.restore_page_outlined, color: colorScheme.error),
+                leading: Icon(
+                  Icons.restore_page_outlined,
+                  color: colorScheme.error,
+                ),
                 title: Text(
                   'Reset SQLite Marketplace Database',
                   style: TextStyle(
@@ -242,10 +268,15 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
                 ),
                 subtitle: Text(
                   'Flushes tables and restores original seed data',
-                  style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 trailing: OutlinedButton(
-                  style: OutlinedButton.styleFrom(foregroundColor: colorScheme.error),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: colorScheme.error,
+                  ),
                   onPressed: _resetDatabase,
                   child: const Text('Reset DB', style: TextStyle(fontSize: 12)),
                 ),

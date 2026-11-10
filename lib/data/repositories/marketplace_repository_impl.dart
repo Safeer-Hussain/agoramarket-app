@@ -1,4 +1,5 @@
 import 'package:latlong2/latlong.dart';
+
 import '../../core/database/app_database.dart';
 import '../../domain/entities/video_pitch.dart';
 import '../../domain/entities/comment.dart';
@@ -8,7 +9,8 @@ class MarketplaceRepositoryImpl implements MarketplaceRepository {
   final AppDatabase _database;
   final Distance _distance = const Distance();
 
-  MarketplaceRepositoryImpl({AppDatabase? database}) : _database = database ?? AppDatabase();
+  MarketplaceRepositoryImpl({AppDatabase? database})
+    : _database = database ?? AppDatabase();
 
   @override
   Future<List<VideoPitch>> getVideoPitches() async {
@@ -20,12 +22,19 @@ class MarketplaceRepositoryImpl implements MarketplaceRepository {
   @override
   Future<void> toggleLike(String pitchId) async {
     final db = await _database.database;
-    final rows = await db.query('video_pitches', where: 'id = ?', whereArgs: [pitchId], limit: 1);
+    final rows = await db.query(
+      'video_pitches',
+      where: 'id = ?',
+      whereArgs: [pitchId],
+      limit: 1,
+    );
     if (rows.isEmpty) return;
 
     final current = VideoPitch.fromMap(rows.first);
     final newIsLiked = !current.isLiked;
-    final newCount = newIsLiked ? current.likesCount + 1 : current.likesCount - 1;
+    final newCount = newIsLiked
+        ? current.likesCount + 1
+        : current.likesCount - 1;
 
     await db.update(
       'video_pitches',
@@ -41,12 +50,19 @@ class MarketplaceRepositoryImpl implements MarketplaceRepository {
   @override
   Future<void> toggleBookmark(String pitchId) async {
     final db = await _database.database;
-    final rows = await db.query('video_pitches', where: 'id = ?', whereArgs: [pitchId], limit: 1);
+    final rows = await db.query(
+      'video_pitches',
+      where: 'id = ?',
+      whereArgs: [pitchId],
+      limit: 1,
+    );
     if (rows.isEmpty) return;
 
     final current = VideoPitch.fromMap(rows.first);
     final newIsBookmarked = !current.isBookmarked;
-    final newCount = newIsBookmarked ? current.bookmarksCount + 1 : current.bookmarksCount - 1;
+    final newCount = newIsBookmarked
+        ? current.bookmarksCount + 1
+        : current.bookmarksCount - 1;
 
     await db.update(
       'video_pitches',
@@ -96,7 +112,8 @@ class MarketplaceRepositoryImpl implements MarketplaceRepository {
     return allPitches.where((pitch) {
       if (query != null && query.trim().isNotEmpty) {
         final q = query.toLowerCase();
-        final match = pitch.title.toLowerCase().contains(q) ||
+        final match =
+            pitch.title.toLowerCase().contains(q) ||
             pitch.creatorName.toLowerCase().contains(q) ||
             pitch.role.toLowerCase().contains(q) ||
             pitch.skills.any((s) => s.toLowerCase().contains(q)) ||

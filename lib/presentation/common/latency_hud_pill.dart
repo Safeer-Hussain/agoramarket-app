@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/performance/render_latency_monitor.dart';
 
 class LatencyHudPill extends StatelessWidget {
@@ -26,7 +27,9 @@ class LatencyHudPill extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.85),
+                color: colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.85,
+                ),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: isSub8ms ? colorScheme.primary : colorScheme.tertiary,
@@ -47,7 +50,9 @@ class LatencyHudPill extends StatelessWidget {
                     width: 7,
                     height: 7,
                     decoration: BoxDecoration(
-                      color: isSub8ms ? colorScheme.primary : colorScheme.tertiary,
+                      color: isSub8ms
+                          ? colorScheme.primary
+                          : colorScheme.tertiary,
                       shape: BoxShape.circle,
                     ),
                   ),

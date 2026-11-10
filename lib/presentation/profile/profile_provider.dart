@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../domain/entities/video_pitch.dart';
@@ -55,13 +56,16 @@ class ProfileProvider extends ChangeNotifier {
   void _loadSettings() {
     final localPrefs = prefs;
     if (localPrefs == null) return;
-    _selectedCurrency = localPrefs.getString(AppConstants.prefCurrency) ?? AppConstants.defaultCurrency;
+    _selectedCurrency =
+        localPrefs.getString(AppConstants.prefCurrency) ??
+        AppConstants.defaultCurrency;
     _distanceUnit = localPrefs.getString(AppConstants.prefDistanceUnit) ?? 'km';
   }
 
   Future<void> toggleCurrency() async {
-    _selectedCurrency =
-        (_selectedCurrency == AppConstants.defaultCurrency) ? AppConstants.altCurrency : AppConstants.defaultCurrency;
+    _selectedCurrency = (_selectedCurrency == AppConstants.defaultCurrency)
+        ? AppConstants.altCurrency
+        : AppConstants.defaultCurrency;
     notifyListeners();
     final localPrefs = prefs;
     if (localPrefs != null) {
@@ -86,7 +90,9 @@ class ProfileProvider extends ChangeNotifier {
       _profile = await profileRepository.getUserProfile();
       _portfolioItems = await profileRepository.getPortfolioItems();
       final allPitches = await marketplaceRepository.getVideoPitches();
-      _myPitches = allPitches.where((p) => p.creatorName == 'Safeer Hussain').toList();
+      _myPitches = allPitches
+          .where((p) => p.creatorName == 'Safeer Hussain')
+          .toList();
     } finally {
       _isLoading = false;
       notifyListeners();

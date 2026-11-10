@@ -134,7 +134,10 @@ class VideoPitch {
       isLiked: (map['is_liked'] as int) == 1,
       isBookmarked: (map['is_bookmarked'] as int) == 1,
       pitchScript: map['pitch_script'] as String,
-      skills: (map['skills'] as String).split(',').where((s) => s.isNotEmpty).toList(),
+      skills: (map['skills'] as String)
+          .split(',')
+          .where((s) => s.isNotEmpty)
+          .toList(),
       createdAt: map['created_at'] as String,
     );
   }

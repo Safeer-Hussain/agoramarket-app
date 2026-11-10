@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'video_feed_provider.dart';
 import 'widgets/video_reel_canvas.dart';
 import 'widgets/video_overlay_hud.dart';
@@ -27,7 +28,8 @@ class _VideoFeedViewState extends State<VideoFeedView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Consumer<VideoFeedProvider>(
       builder: (context, feedProvider, child) {
@@ -42,7 +44,11 @@ class _VideoFeedViewState extends State<VideoFeedView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.video_library_outlined, size: 48, color: colorScheme.outline),
+                Icon(
+                  Icons.video_library_outlined,
+                  size: 48,
+                  color: colorScheme.outline,
+                ),
                 const SizedBox(height: 12),
                 Text(
                   'No video pitches loaded.',
@@ -78,7 +84,10 @@ class _VideoFeedViewState extends State<VideoFeedView> {
     );
   }
 
-  Widget _buildPortraitLayout(BuildContext context, VideoFeedProvider feedProvider) {
+  Widget _buildPortraitLayout(
+    BuildContext context,
+    VideoFeedProvider feedProvider,
+  ) {
     return PageView.builder(
       controller: _pageController,
       scrollDirection: Axis.vertical,
@@ -102,7 +111,10 @@ class _VideoFeedViewState extends State<VideoFeedView> {
     );
   }
 
-  Widget _buildLandscapeLayout(BuildContext context, VideoFeedProvider feedProvider) {
+  Widget _buildLandscapeLayout(
+    BuildContext context,
+    VideoFeedProvider feedProvider,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
     final pitch = feedProvider.currentPitch ?? feedProvider.pitches.first;
 
@@ -127,7 +139,9 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                       IconButton.filledTonal(
                         icon: const Icon(Icons.arrow_upward_rounded, size: 18),
                         onPressed: feedProvider.currentIndex > 0
-                            ? () => feedProvider.setIndex(feedProvider.currentIndex - 1)
+                            ? () => feedProvider.setIndex(
+                                feedProvider.currentIndex - 1,
+                              )
                             : null,
                       ),
                       Text(
@@ -139,9 +153,16 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                         ),
                       ),
                       IconButton.filledTonal(
-                        icon: const Icon(Icons.arrow_downward_rounded, size: 18),
-                        onPressed: feedProvider.currentIndex < feedProvider.pitches.length - 1
-                            ? () => feedProvider.setIndex(feedProvider.currentIndex + 1)
+                        icon: const Icon(
+                          Icons.arrow_downward_rounded,
+                          size: 18,
+                        ),
+                        onPressed:
+                            feedProvider.currentIndex <
+                                feedProvider.pitches.length - 1
+                            ? () => feedProvider.setIndex(
+                                feedProvider.currentIndex + 1,
+                              )
                             : null,
                       ),
                     ],
@@ -191,7 +212,11 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                                 ),
                               ),
                               const SizedBox(width: 4),
-                              Icon(Icons.verified_rounded, size: 14, color: colorScheme.primary),
+                              Icon(
+                                Icons.verified_rounded,
+                                size: 14,
+                                color: colorScheme.primary,
+                              ),
                             ],
                           ),
                           Text(
@@ -205,7 +230,10 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(6),
@@ -240,7 +268,10 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                   runSpacing: 6,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.surfaceContainerHigh,
                         borderRadius: BorderRadius.circular(8),
@@ -256,7 +287,10 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.surfaceContainerHigh,
                         borderRadius: BorderRadius.circular(8),
@@ -265,7 +299,11 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.location_on_outlined, size: 12, color: colorScheme.primary),
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 12,
+                            color: colorScheme.primary,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             pitch.locationName,
@@ -320,7 +358,10 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                   runSpacing: 6,
                   children: pitch.skills.map((s) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.surfaceContainerHighest,
                         borderRadius: BorderRadius.circular(6),
@@ -355,18 +396,28 @@ class _VideoFeedViewState extends State<VideoFeedView> {
                     ),
                     FilledButton.tonalIcon(
                       style: FilledButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
                       ),
                       icon: Icon(
-                        pitch.isLiked ? Icons.favorite_rounded : Icons.favorite_outline_rounded,
-                        color: pitch.isLiked ? colorScheme.error : colorScheme.onSurface,
+                        pitch.isLiked
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_outline_rounded,
+                        color: pitch.isLiked
+                            ? colorScheme.error
+                            : colorScheme.onSurface,
                         size: 18,
                       ),
                       label: Text('${pitch.likesCount}'),
                       onPressed: () => feedProvider.toggleLike(pitch.id),
                     ),
                     IconButton.filledTonal(
-                      icon: const Icon(Icons.chat_bubble_outline_rounded, size: 18),
+                      icon: const Icon(
+                        Icons.chat_bubble_outline_rounded,
+                        size: 18,
+                      ),
                       onPressed: () => CommentSheet.show(context, pitch.id),
                     ),
                     IconButton.filledTonal(

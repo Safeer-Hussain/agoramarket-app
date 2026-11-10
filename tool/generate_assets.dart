@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math' as math;
+
 import 'package:image/image.dart' as img;
 
 void main() {
@@ -27,8 +28,20 @@ void generateAppIcon() {
 
   // Draw sleek geometric play-prism and location pin emblem
   // Pin head outer circle
-  img.drawCircle(image, x: 256, y: 220, radius: 140, color: img.ColorRgba8(0, 229, 186, 255)); // Electric teal
-  img.drawCircle(image, x: 256, y: 220, radius: 120, color: img.ColorRgba8(13, 17, 23, 255)); // Obsidian inner
+  img.drawCircle(
+    image,
+    x: 256,
+    y: 220,
+    radius: 140,
+    color: img.ColorRgba8(0, 229, 186, 255),
+  ); // Electric teal
+  img.drawCircle(
+    image,
+    x: 256,
+    y: 220,
+    radius: 120,
+    color: img.ColorRgba8(13, 17, 23, 255),
+  ); // Obsidian inner
 
   // Coral-amber play prism (triangle)
   final p1x = 225, p1y = 165;
@@ -66,7 +79,16 @@ void generateAppIcon() {
   File('assets/icons/app_icon.png').writeAsBytesSync(img.encodePng(image));
 }
 
-bool pointInTriangle(int px, int py, int x1, int y1, int x2, int y2, int x3, int y3) {
+bool pointInTriangle(
+  int px,
+  int py,
+  int x1,
+  int y1,
+  int x2,
+  int y2,
+  int x3,
+  int y3,
+) {
   final d1 = (px - x2) * (y1 - y2) - (x1 - x2) * (py - y2);
   final d2 = (px - x3) * (y2 - y3) - (x2 - x3) * (py - y3);
   final d3 = (px - x1) * (y3 - y1) - (x3 - x1) * (py - y1);
@@ -117,9 +139,15 @@ void generateThumbnails() {
       final ratio = y / 1280.0;
       for (int x = 0; x < 720; x++) {
         final xRatio = x / 720.0;
-        final r = (c1[0] * (1 - ratio) + c2[0] * ratio * (0.6 + 0.4 * xRatio)).toInt().clamp(0, 255);
-        final g = (c1[1] * (1 - ratio) + c2[1] * ratio * (0.6 + 0.4 * xRatio)).toInt().clamp(0, 255);
-        final b = (c1[2] * (1 - ratio) + c2[2] * ratio * (0.6 + 0.4 * xRatio)).toInt().clamp(0, 255);
+        final r = (c1[0] * (1 - ratio) + c2[0] * ratio * (0.6 + 0.4 * xRatio))
+            .toInt()
+            .clamp(0, 255);
+        final g = (c1[1] * (1 - ratio) + c2[1] * ratio * (0.6 + 0.4 * xRatio))
+            .toInt()
+            .clamp(0, 255);
+        final b = (c1[2] * (1 - ratio) + c2[2] * ratio * (0.6 + 0.4 * xRatio))
+            .toInt()
+            .clamp(0, 255);
         image.setPixelRgba(x, y, r, g, b, 255);
       }
     }
@@ -128,7 +156,13 @@ void generateThumbnails() {
     for (int y = 200; y < 1000; y += 40) {
       for (int x = 60; x < 660; x += 40) {
         if ((x + y) % 80 == 0) {
-          img.drawCircle(image, x: x, y: y, radius: 2, color: img.ColorRgba8(255, 255, 255, 30));
+          img.drawCircle(
+            image,
+            x: x,
+            y: y,
+            radius: 2,
+            color: img.ColorRgba8(255, 255, 255, 30),
+          );
         }
       }
     }
@@ -141,14 +175,33 @@ void generateThumbnails() {
           image.setPixelRgba(cx, cy, accent[0], accent[1], accent[2], 200);
         } else {
           final cur = image.getPixel(cx, cy);
-          image.setPixelRgba(cx, cy, (cur.r * 0.7).toInt(), (cur.g * 0.7).toInt(), (cur.b * 0.7).toInt(), 255);
+          image.setPixelRgba(
+            cx,
+            cy,
+            (cur.r * 0.7).toInt(),
+            (cur.g * 0.7).toInt(),
+            (cur.b * 0.7).toInt(),
+            255,
+          );
         }
       }
     }
 
     // Center tech symbol (prism/nodes)
-    img.drawCircle(image, x: 360, y: 640, radius: 80, color: img.ColorRgba8(accent[0], accent[1], accent[2], 230));
-    img.drawCircle(image, x: 360, y: 640, radius: 60, color: img.ColorRgba8(13, 17, 23, 240));
+    img.drawCircle(
+      image,
+      x: 360,
+      y: 640,
+      radius: 80,
+      color: img.ColorRgba8(accent[0], accent[1], accent[2], 230),
+    );
+    img.drawCircle(
+      image,
+      x: 360,
+      y: 640,
+      radius: 60,
+      color: img.ColorRgba8(13, 17, 23, 240),
+    );
 
     // Inner play icon
     final p1x = 345, p1y = 610;
@@ -168,9 +221,21 @@ void generateThumbnails() {
 
 void generateBadges() {
   final badges = [
-    {'name': 'badge_job.png', 'color': [0, 229, 186], 'sub': [13, 40, 50]},
-    {'name': 'badge_freelancer.png', 'color': [255, 107, 74], 'sub': [50, 20, 15]},
-    {'name': 'badge_agency.png', 'color': [78, 140, 255], 'sub': [15, 25, 60]},
+    {
+      'name': 'badge_job.png',
+      'color': [0, 229, 186],
+      'sub': [13, 40, 50],
+    },
+    {
+      'name': 'badge_freelancer.png',
+      'color': [255, 107, 74],
+      'sub': [50, 20, 15],
+    },
+    {
+      'name': 'badge_agency.png',
+      'color': [78, 140, 255],
+      'sub': [15, 25, 60],
+    },
   ];
 
   for (final b in badges) {
@@ -194,8 +259,20 @@ void generateBadges() {
     }
 
     // Center icon geometry
-    img.drawCircle(image, x: 128, y: 128, radius: 36, color: img.ColorRgba8(col[0], col[1], col[2], 255));
-    img.drawCircle(image, x: 128, y: 128, radius: 24, color: img.ColorRgba8(sub[0], sub[1], sub[2], 255));
+    img.drawCircle(
+      image,
+      x: 128,
+      y: 128,
+      radius: 36,
+      color: img.ColorRgba8(col[0], col[1], col[2], 255),
+    );
+    img.drawCircle(
+      image,
+      x: 128,
+      y: 128,
+      radius: 24,
+      color: img.ColorRgba8(sub[0], sub[1], sub[2], 255),
+    );
 
     File('assets/images/${b['name']}').writeAsBytesSync(img.encodePng(image));
   }
@@ -203,10 +280,26 @@ void generateBadges() {
 
 void generateAvatars() {
   final avatars = [
-    {'name': 'avatar_safeer.png', 'color': [0, 229, 186], 'initial': 'S'},
-    {'name': 'avatar_ayesha.png', 'color': [255, 107, 74], 'initial': 'A'},
-    {'name': 'avatar_bilal.png', 'color': [120, 100, 240], 'initial': 'B'},
-    {'name': 'avatar_zoya.png', 'color': [255, 180, 50], 'initial': 'Z'},
+    {
+      'name': 'avatar_safeer.png',
+      'color': [0, 229, 186],
+      'initial': 'S',
+    },
+    {
+      'name': 'avatar_ayesha.png',
+      'color': [255, 107, 74],
+      'initial': 'A',
+    },
+    {
+      'name': 'avatar_bilal.png',
+      'color': [120, 100, 240],
+      'initial': 'B',
+    },
+    {
+      'name': 'avatar_zoya.png',
+      'color': [255, 180, 50],
+      'initial': 'Z',
+    },
   ];
 
   for (final a in avatars) {
@@ -233,7 +326,13 @@ void generateAvatars() {
     }
 
     // Stylized head and shoulders vector silhouette
-    img.drawCircle(image, x: 128, y: 100, radius: 42, color: img.ColorRgba8(col[0], col[1], col[2], 220));
+    img.drawCircle(
+      image,
+      x: 128,
+      y: 100,
+      radius: 42,
+      color: img.ColorRgba8(col[0], col[1], col[2], 220),
+    );
     // Shoulders
     for (int y = 150; y < 225; y++) {
       final w = ((y - 150) / 75.0 * 80).toInt();
@@ -247,8 +346,20 @@ void generateAvatars() {
     }
 
     // Verified checkmark badge in bottom-right
-    img.drawCircle(image, x: 195, y: 195, radius: 24, color: img.ColorRgba8(0, 229, 186, 255));
-    img.drawCircle(image, x: 195, y: 195, radius: 18, color: img.ColorRgba8(13, 17, 23, 255));
+    img.drawCircle(
+      image,
+      x: 195,
+      y: 195,
+      radius: 24,
+      color: img.ColorRgba8(0, 229, 186, 255),
+    );
+    img.drawCircle(
+      image,
+      x: 195,
+      y: 195,
+      radius: 18,
+      color: img.ColorRgba8(13, 17, 23, 255),
+    );
 
     File('assets/images/${a['name']}').writeAsBytesSync(img.encodePng(image));
   }

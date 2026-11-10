@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
+
 import '../../domain/entities/video_pitch.dart';
 import '../navigation/adaptive_scaffold.dart';
 import 'map_filter_provider.dart';
@@ -36,7 +37,8 @@ class _TalentMapViewState extends State<TalentMapView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Consumer<MapFilterProvider>(
       builder: (context, mapProvider, child) {
@@ -80,7 +82,10 @@ class _TalentMapViewState extends State<TalentMapView> {
     );
   }
 
-  Widget _buildPortraitLayout(BuildContext context, MapFilterProvider mapProvider) {
+  Widget _buildPortraitLayout(
+    BuildContext context,
+    MapFilterProvider mapProvider,
+  ) {
     final selected = mapProvider.selectedPitch;
 
     return Stack(
@@ -101,7 +106,10 @@ class _TalentMapViewState extends State<TalentMapView> {
     );
   }
 
-  Widget _buildLandscapeLayout(BuildContext context, MapFilterProvider mapProvider) {
+  Widget _buildLandscapeLayout(
+    BuildContext context,
+    MapFilterProvider mapProvider,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
     final selected = mapProvider.selectedPitch;
 
@@ -134,7 +142,10 @@ class _TalentMapViewState extends State<TalentMapView> {
                 children: [
                   // Top status bar
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.surfaceContainerHigh,
                       borderRadius: BorderRadius.circular(8),
@@ -142,7 +153,11 @@ class _TalentMapViewState extends State<TalentMapView> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.hub_outlined, size: 16, color: colorScheme.primary),
+                        Icon(
+                          Icons.hub_outlined,
+                          size: 16,
+                          color: colorScheme.primary,
+                        ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -190,7 +205,12 @@ class _TalentMapViewState extends State<TalentMapView> {
                     final isCurrent = item.id == selected?.id;
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 6),
-                      child: _buildMiniListingTile(context, item, isCurrent, mapProvider),
+                      child: _buildMiniListingTile(
+                        context,
+                        item,
+                        isCurrent,
+                        mapProvider,
+                      ),
                     );
                   }),
                 ],
@@ -243,7 +263,9 @@ class _TalentMapViewState extends State<TalentMapView> {
       final isSel = selected?.id == pitch.id;
       final Color pinColor = pitch.category == 'Freelancer'
           ? colorScheme.secondary
-          : (pitch.category == 'Job' ? colorScheme.primary : colorScheme.tertiary);
+          : (pitch.category == 'Job'
+                ? colorScheme.primary
+                : colorScheme.tertiary);
 
       markers.add(
         Marker(
@@ -252,11 +274,15 @@ class _TalentMapViewState extends State<TalentMapView> {
           height: isSel ? 52 : 42,
           child: Semantics(
             button: true,
-            label: '${pitch.creatorName}, ${pitch.role}, \$${pitch.hourlyRate.toStringAsFixed(0)} per hour in ${pitch.locationName}',
+            label:
+                '${pitch.creatorName}, ${pitch.role}, \$${pitch.hourlyRate.toStringAsFixed(0)} per hour in ${pitch.locationName}',
             child: GestureDetector(
               onTap: () {
                 mapProvider.selectPitch(pitch);
-                _mapController.move(LatLng(pitch.latitude, pitch.longitude), 14.0);
+                _mapController.move(
+                  LatLng(pitch.latitude, pitch.longitude),
+                  14.0,
+                );
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
@@ -323,7 +349,10 @@ class _TalentMapViewState extends State<TalentMapView> {
     );
   }
 
-  Widget _buildSearchBarOverlay(BuildContext context, MapFilterProvider mapProvider) {
+  Widget _buildSearchBarOverlay(
+    BuildContext context,
+    MapFilterProvider mapProvider,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Positioned(
@@ -349,7 +378,11 @@ class _TalentMapViewState extends State<TalentMapView> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 14),
-                child: Icon(Icons.search_rounded, color: colorScheme.primary, size: 20),
+                child: Icon(
+                  Icons.search_rounded,
+                  color: colorScheme.primary,
+                  size: 20,
+                ),
               ),
               Expanded(
                 child: TextField(
@@ -365,7 +398,10 @@ class _TalentMapViewState extends State<TalentMapView> {
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
                   ),
                   onChanged: (q) => mapProvider.setSearchQuery(q),
                 ),
@@ -373,7 +409,11 @@ class _TalentMapViewState extends State<TalentMapView> {
               if (_searchController.text.isNotEmpty)
                 IconButton(
                   tooltip: 'Clear search query',
-                  icon: Icon(Icons.clear_rounded, size: 18, color: colorScheme.outline),
+                  icon: Icon(
+                    Icons.clear_rounded,
+                    size: 18,
+                    color: colorScheme.outline,
+                  ),
                   onPressed: () {
                     _searchController.clear();
                     mapProvider.setSearchQuery('');
@@ -381,7 +421,11 @@ class _TalentMapViewState extends State<TalentMapView> {
                 ),
               IconButton(
                 tooltip: 'Open map filter and radius settings',
-                icon: Icon(Icons.tune_rounded, size: 20, color: colorScheme.onSurface),
+                icon: Icon(
+                  Icons.tune_rounded,
+                  size: 20,
+                  color: colorScheme.onSurface,
+                ),
                 onPressed: () => MapFilterSheet.show(context),
               ),
             ],
@@ -408,10 +452,14 @@ class _TalentMapViewState extends State<TalentMapView> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.surfaceContainerHigh : colorScheme.surfaceContainerLow,
+          color: isSelected
+              ? colorScheme.surfaceContainerHigh
+              : colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+            color: isSelected
+                ? colorScheme.primary
+                : colorScheme.outlineVariant,
             width: isSelected ? 1.5 : 1,
           ),
         ),

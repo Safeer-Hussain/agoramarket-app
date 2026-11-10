@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../map_filter_provider.dart';
 
 class MapFilterSheet extends StatelessWidget {
@@ -181,19 +182,22 @@ class MapFilterSheet extends StatelessWidget {
                   title: 'Gulberg Tech Core',
                   lat: 31.5204,
                   lng: 74.3587,
-                  onTap: () => mapProvider.recenterToTechHub(lat: 31.5204, lng: 74.3587),
+                  onTap: () =>
+                      mapProvider.recenterToTechHub(lat: 31.5204, lng: 74.3587),
                 ),
                 _HubPresetButton(
                   title: 'DHA Phase 5 Innovation',
                   lat: 31.4697,
                   lng: 74.4084,
-                  onTap: () => mapProvider.recenterToTechHub(lat: 31.4697, lng: 74.4084),
+                  onTap: () =>
+                      mapProvider.recenterToTechHub(lat: 31.4697, lng: 74.4084),
                 ),
                 _HubPresetButton(
                   title: 'Arfa Software Park',
                   lat: 31.4759,
                   lng: 74.3414,
-                  onTap: () => mapProvider.recenterToTechHub(lat: 31.4759, lng: 74.3414),
+                  onTap: () =>
+                      mapProvider.recenterToTechHub(lat: 31.4759, lng: 74.3414),
                 ),
               ],
             ),
@@ -222,7 +226,11 @@ class _HubPresetButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ActionChip(
-      avatar: Icon(Icons.location_city_rounded, size: 14, color: colorScheme.primary),
+      avatar: Icon(
+        Icons.location_city_rounded,
+        size: 14,
+        color: colorScheme.primary,
+      ),
       label: Text(
         title,
         style: TextStyle(fontSize: 11, color: colorScheme.onSurface),

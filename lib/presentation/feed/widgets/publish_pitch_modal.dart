@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../video_feed_provider.dart';
 
@@ -24,9 +25,13 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
   final _titleController = TextEditingController();
   final _roleController = TextEditingController();
   final _rateController = TextEditingController();
-  final _locationController = TextEditingController(text: 'Gulberg III, Lahore');
+  final _locationController = TextEditingController(
+    text: 'Gulberg III, Lahore',
+  );
   final _scriptController = TextEditingController();
-  final _skillsController = TextEditingController(text: 'Flutter, Dart, Clean Architecture');
+  final _skillsController = TextEditingController(
+    text: 'Flutter, Dart, Clean Architecture',
+  );
   String _selectedCategory = 'Freelancer';
 
   @override
@@ -65,7 +70,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
     );
 
     Navigator.of(context).pop();
-    AppFeedback.showSuccess(context, 'Video pitch published to sub-second live feed');
+    AppFeedback.showSuccess(
+      context,
+      'Video pitch published to sub-second live feed',
+    );
   }
 
   @override
@@ -81,7 +89,9 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
           child: Container(
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainer,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
             ),
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: Form(
@@ -131,7 +141,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _titleController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'e.g. Architecting 120FPS Vertical Video Feed',
                     ),
@@ -156,7 +169,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                   const SizedBox(height: 6),
                   SegmentedButton<String>(
                     segments: const [
-                      ButtonSegment(value: 'Freelancer', label: Text('Freelancer')),
+                      ButtonSegment(
+                        value: 'Freelancer',
+                        label: Text('Freelancer'),
+                      ),
                       ButtonSegment(value: 'Job', label: Text('Job Role')),
                       ButtonSegment(value: 'Agency', label: Text('Agency')),
                     ],
@@ -187,7 +203,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                             const SizedBox(height: 6),
                             TextFormField(
                               controller: _roleController,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
                               decoration: const InputDecoration(
                                 hintText: 'Principal Flutter Architect',
                               ),
@@ -218,7 +237,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                             TextFormField(
                               controller: _rateController,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
                               decoration: const InputDecoration(
                                 hintText: '95',
                                 prefixText: '\$ ',
@@ -250,7 +272,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _locationController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Gulberg III, Lahore',
                     ),
@@ -275,7 +300,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _skillsController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Flutter, Dart, Clean Architecture',
                     ),
@@ -301,7 +329,10 @@ class _PublishPitchModalState extends State<PublishPitchModal> {
                   TextFormField(
                     controller: _scriptController,
                     maxLines: 3,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Outline what you demonstrate in this technical pitch reel',
                     ),

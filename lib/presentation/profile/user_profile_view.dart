@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/utils/app_feedback.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../domain/entities/video_pitch.dart';
@@ -15,7 +16,8 @@ class UserProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Consumer<ProfileProvider>(
       builder: (context, provider, child) {
@@ -93,7 +95,10 @@ class UserProfileView extends StatelessWidget {
           const SizedBox(height: 10),
           _buildPitchGrid(context, provider.myPitches),
           const SizedBox(height: 20),
-          _buildSectionTitle(context, 'Verified Portfolio & Architecture Case Studies'),
+          _buildSectionTitle(
+            context,
+            'Verified Portfolio & Architecture Case Studies',
+          ),
           const SizedBox(height: 10),
           _buildPortfolioList(context, provider.portfolioItems),
           const SizedBox(height: 40),
@@ -191,7 +196,11 @@ class UserProfileView extends StatelessWidget {
                         color: colorScheme.primary,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.check, size: 14, color: colorScheme.onPrimary),
+                      child: Icon(
+                        Icons.check,
+                        size: 14,
+                        color: colorScheme.onPrimary,
+                      ),
                     ),
                   ),
                 ],
@@ -215,7 +224,11 @@ class UserProfileView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 4),
-                        Icon(Icons.verified_rounded, size: 16, color: colorScheme.primary),
+                        Icon(
+                          Icons.verified_rounded,
+                          size: 16,
+                          color: colorScheme.primary,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 2),
@@ -230,7 +243,11 @@ class UserProfileView extends StatelessWidget {
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Icon(Icons.location_on_outlined, size: 13, color: colorScheme.onSurfaceVariant),
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 13,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
@@ -307,7 +324,9 @@ class UserProfileView extends StatelessWidget {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: profile.isAvailable ? colorScheme.primary : colorScheme.outline,
+                          color: profile.isAvailable
+                              ? colorScheme.primary
+                              : colorScheme.outline,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -331,7 +350,8 @@ class UserProfileView extends StatelessWidget {
                 const SizedBox(width: 8),
                 Semantics(
                   toggled: profile.isAvailable,
-                  label: 'Toggle contract availability status. Currently ${profile.isAvailable ? "Open for contracts" : "Booked"}',
+                  label:
+                      'Toggle contract availability status. Currently ${profile.isAvailable ? "Open for contracts" : "Booked"}',
                   child: Switch(
                     value: profile.isAvailable,
                     activeThumbColor: colorScheme.primary,
@@ -339,7 +359,9 @@ class UserProfileView extends StatelessWidget {
                       provider.toggleAvailability(val);
                       AppFeedback.showSuccess(
                         context,
-                        val ? 'Availability set to Open' : 'Availability set to Booked',
+                        val
+                            ? 'Availability set to Open'
+                            : 'Availability set to Booked',
                       );
                     },
                   ),
@@ -509,11 +531,18 @@ class UserProfileView extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.favorite_rounded, size: 10, color: colorScheme.error),
+                            Icon(
+                              Icons.favorite_rounded,
+                              size: 10,
+                              color: colorScheme.error,
+                            ),
                             const SizedBox(width: 2),
                             Text(
                               p.likesCount.toString(),
-                              style: TextStyle(fontSize: 9, color: colorScheme.onSurface),
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: colorScheme.onSurface,
+                              ),
                             ),
                           ],
                         ),
@@ -556,7 +585,11 @@ class UserProfileView extends StatelessWidget {
                   color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(Icons.code_rounded, size: 24, color: colorScheme.primary),
+                child: Icon(
+                  Icons.code_rounded,
+                  size: 24,
+                  color: colorScheme.primary,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -576,7 +609,10 @@ class UserProfileView extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(4),

@@ -91,7 +91,10 @@ class UserProfile {
       isAvailable: (map['is_available'] as int) == 1,
       rating: (map['rating'] as num).toDouble(),
       reviewsCount: map['reviews_count'] as int,
-      skills: (map['skills'] as String).split(',').where((s) => s.isNotEmpty).toList(),
+      skills: (map['skills'] as String)
+          .split(',')
+          .where((s) => s.isNotEmpty)
+          .toList(),
       completedContracts: map['completed_contracts'] as int,
       avatarAsset: map['avatar_asset'] as String,
     );

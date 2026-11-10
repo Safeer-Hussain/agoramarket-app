@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../debug/recruiter_debug_drawer.dart';
@@ -59,7 +60,9 @@ class SettingsSheet extends StatelessWidget {
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
               secondary: Icon(
-                themeProvider.isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                themeProvider.isDarkMode
+                    ? Icons.dark_mode_rounded
+                    : Icons.light_mode_rounded,
                 color: colorScheme.primary,
               ),
               title: Text(
@@ -72,7 +75,10 @@ class SettingsSheet extends StatelessWidget {
               ),
               subtitle: Text(
                 'Obsidian & Electric Teal theme parity',
-                style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
               value: themeProvider.isDarkMode,
               activeThumbColor: colorScheme.primary,
@@ -83,7 +89,10 @@ class SettingsSheet extends StatelessWidget {
             // Currency Switch
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.currency_exchange_rounded, color: colorScheme.secondary),
+              leading: Icon(
+                Icons.currency_exchange_rounded,
+                color: colorScheme.secondary,
+              ),
               title: Text(
                 'Primary Currency',
                 style: TextStyle(
@@ -94,7 +103,10 @@ class SettingsSheet extends StatelessWidget {
               ),
               subtitle: Text(
                 'Toggle between USD and Pakistani Rupee (PKR)',
-                style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
               trailing: FilledButton.tonal(
                 onPressed: () => profileProvider.toggleCurrency(),
@@ -109,7 +121,10 @@ class SettingsSheet extends StatelessWidget {
             // Distance Unit
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.straighten_rounded, color: colorScheme.tertiary),
+              leading: Icon(
+                Icons.straighten_rounded,
+                color: colorScheme.tertiary,
+              ),
               title: Text(
                 'Spatial Distance Unit',
                 style: TextStyle(
@@ -120,7 +135,10 @@ class SettingsSheet extends StatelessWidget {
               ),
               subtitle: Text(
                 'Kilometers (km) or Miles (mi)',
-                style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
               trailing: FilledButton.tonal(
                 onPressed: () => profileProvider.toggleDistanceUnit(),
@@ -140,7 +158,10 @@ class SettingsSheet extends StatelessWidget {
                   RecruiterDebugDrawer.show(context);
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: colorScheme.surfaceContainerHigh,
                     borderRadius: BorderRadius.circular(20),
@@ -149,7 +170,11 @@ class SettingsSheet extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.shield_outlined, size: 14, color: colorScheme.primary),
+                      Icon(
+                        Icons.shield_outlined,
+                        size: 14,
+                        color: colorScheme.primary,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         '${AppConstants.appName} ${AppConstants.appVersion} • Long press for Recruiter Drawer',

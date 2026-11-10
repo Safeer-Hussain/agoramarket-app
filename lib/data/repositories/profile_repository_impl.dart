@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/database/app_database.dart';
 import '../../domain/entities/user_profile.dart';
@@ -8,10 +9,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
   final AppDatabase _database;
   final SharedPreferences? prefs;
 
-  ProfileRepositoryImpl({
-    AppDatabase? database,
-    this.prefs,
-  }) : _database = database ?? AppDatabase();
+  ProfileRepositoryImpl({AppDatabase? database, this.prefs})
+    : _database = database ?? AppDatabase();
 
   @override
   Future<UserProfile> getUserProfile() async {
@@ -43,10 +42,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   @override
   Future<void> toggleAvailability(bool isAvailable) async {
     final db = await _database.database;
-    await db.update(
-      'user_profile',
-      {'is_available': isAvailable ? 1 : 0},
-    );
+    await db.update('user_profile', {'is_available': isAvailable ? 1 : 0});
     final localPrefs = prefs;
     if (localPrefs != null) {
       await localPrefs.setBool(AppConstants.prefAvailability, isAvailable);

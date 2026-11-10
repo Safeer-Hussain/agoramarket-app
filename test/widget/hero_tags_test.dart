@@ -11,12 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../mocks/mock_repositories.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Zero duplicate Hero tag exceptions across multi-tab shell', (tester) async {
+  testWidgets('Zero duplicate Hero tag exceptions across multi-tab shell', (
+    tester,
+  ) async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
 
@@ -29,9 +32,15 @@ void main() {
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider(prefs: prefs)),
           ChangeNotifierProvider(create: (_) => RenderLatencyMonitor()),
-          ChangeNotifierProvider(create: (_) => VideoFeedProvider(repository: mockMarketplace)),
-          ChangeNotifierProvider(create: (_) => MapFilterProvider(repository: mockMarketplace)),
-          ChangeNotifierProvider(create: (_) => ChatProvider(repository: mockChat)),
+          ChangeNotifierProvider(
+            create: (_) => VideoFeedProvider(repository: mockMarketplace),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => MapFilterProvider(repository: mockMarketplace),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ChatProvider(repository: mockChat),
+          ),
           ChangeNotifierProvider(create: (_) => AiConciergeProvider()),
           ChangeNotifierProvider(
             create: (_) => ProfileProvider(
@@ -55,7 +64,9 @@ void main() {
     expect(find.byType(AdaptiveScaffold), findsOneWidget);
 
     // Switch to Tab 1 (Map)
-    final scaffoldState = tester.state<AdaptiveScaffoldState>(find.byType(AdaptiveScaffold));
+    final scaffoldState = tester.state<AdaptiveScaffoldState>(
+      find.byType(AdaptiveScaffold),
+    );
     scaffoldState.setDestination(1);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 200));

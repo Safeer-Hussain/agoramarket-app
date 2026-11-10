@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/app_feedback.dart';
 import '../../../domain/entities/chat_entities.dart';
@@ -50,7 +51,11 @@ class ContractProposalCard extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Icon(Icons.description_outlined, size: 18, color: colorScheme.primary),
+                    Icon(
+                      Icons.description_outlined,
+                      size: 18,
+                      color: colorScheme.primary,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -208,7 +213,8 @@ class ContractProposalCard extends StatelessWidget {
                 Expanded(
                   child: Semantics(
                     button: true,
-                    label: 'Accept milestone escrow contract offer of \$${offer.budget.toStringAsFixed(0)}',
+                    label:
+                        'Accept milestone escrow contract offer of \$${offer.budget.toStringAsFixed(0)}',
                     child: FilledButton.icon(
                       style: FilledButton.styleFrom(
                         backgroundColor: colorScheme.primary,
@@ -224,8 +230,14 @@ class ContractProposalCard extends StatelessWidget {
                           'Contract Accepted. Escrow milestone locked.',
                         );
                       },
-                      icon: const Icon(Icons.check_circle_outline_rounded, size: 16),
-                      label: const Text('Accept Offer', style: TextStyle(fontSize: 12)),
+                      icon: const Icon(
+                        Icons.check_circle_outline_rounded,
+                        size: 16,
+                      ),
+                      label: const Text(
+                        'Accept Offer',
+                        style: TextStyle(fontSize: 12),
+                      ),
                     ),
                   ),
                 ),
@@ -243,14 +255,20 @@ class ContractProposalCard extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        chatProvider.updateContractStatus(offer.id, 'COUNTERED');
+                        chatProvider.updateContractStatus(
+                          offer.id,
+                          'COUNTERED',
+                        );
                         AppFeedback.showInfo(
                           context,
                           'Counter-offer signal sent to client.',
                         );
                       },
                       icon: const Icon(Icons.swap_horiz_rounded, size: 16),
-                      label: const Text('Counter Offer', style: TextStyle(fontSize: 12)),
+                      label: const Text(
+                        'Counter Offer',
+                        style: TextStyle(fontSize: 12),
+                      ),
                     ),
                   ),
                 ),

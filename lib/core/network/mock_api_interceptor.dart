@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constants/app_constants.dart';
 import '../database/app_database.dart';
 
@@ -10,10 +12,8 @@ class MockApiInterceptor extends Interceptor {
   final AppDatabase _database;
   final Random _random = Random();
 
-  MockApiInterceptor({
-    this.prefs,
-    AppDatabase? database,
-  }) : _database = database ?? AppDatabase();
+  MockApiInterceptor({this.prefs, AppDatabase? database})
+    : _database = database ?? AppDatabase();
 
   int get _latencyMs {
     final custom = prefs?.getInt(AppConstants.prefSimulatedLatency);
@@ -56,7 +56,10 @@ class MockApiInterceptor extends Interceptor {
       final path = options.path;
 
       if (path.contains('/api/pitches')) {
-        final rows = await db.query('video_pitches', orderBy: 'created_at DESC');
+        final rows = await db.query(
+          'video_pitches',
+          orderBy: 'created_at DESC',
+        );
         return handler.resolve(
           Response(
             requestOptions: options,

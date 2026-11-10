@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../video_feed_provider.dart';
 
@@ -28,7 +29,10 @@ class _CommentSheetState extends State<CommentSheet> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<VideoFeedProvider>(context, listen: false).loadComments(widget.pitchId);
+      Provider.of<VideoFeedProvider>(
+        context,
+        listen: false,
+      ).loadComments(widget.pitchId);
     });
   }
 
@@ -83,7 +87,10 @@ class _CommentSheetState extends State<CommentSheet> {
 
               // Header
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -96,7 +103,10 @@ class _CommentSheetState extends State<CommentSheet> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -117,10 +127,12 @@ class _CommentSheetState extends State<CommentSheet> {
                         ),
                       )
                     : ListView.separated(
-                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         padding: const EdgeInsets.all(16),
                         itemCount: comments.length,
-                        separatorBuilder: (_, index) => const SizedBox(height: 12),
+                        separatorBuilder: (_, index) =>
+                            const SizedBox(height: 12),
                         itemBuilder: (context, index) {
                           final c = comments[index];
                           return Container(
@@ -128,7 +140,9 @@ class _CommentSheetState extends State<CommentSheet> {
                             decoration: BoxDecoration(
                               color: colorScheme.surfaceContainerHigh,
                               borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: colorScheme.outlineVariant),
+                              border: Border.all(
+                                color: colorScheme.outlineVariant,
+                              ),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,8 +151,11 @@ class _CommentSheetState extends State<CommentSheet> {
                                   children: [
                                     CircleAvatar(
                                       radius: 12,
-                                      backgroundColor: colorScheme.surfaceContainerHighest,
-                                      backgroundImage: AssetImage(c.authorAvatar),
+                                      backgroundColor:
+                                          colorScheme.surfaceContainerHighest,
+                                      backgroundImage: AssetImage(
+                                        c.authorAvatar,
+                                      ),
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
@@ -179,30 +196,42 @@ class _CommentSheetState extends State<CommentSheet> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerHigh,
-                  border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+                  border: Border(
+                    top: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: TextField(
                         controller: _commentController,
-                        style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                        style: TextStyle(
+                          color: colorScheme.onSurface,
+                          fontSize: 13,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Add a professional response...',
                           hintStyle: TextStyle(
                             color: colorScheme.onSurfaceVariant,
                             fontSize: 13,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
                           filled: true,
                           fillColor: colorScheme.surfaceContainer,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24),
-                            borderSide: BorderSide(color: colorScheme.outlineVariant),
+                            borderSide: BorderSide(
+                              color: colorScheme.outlineVariant,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24),
-                            borderSide: BorderSide(color: colorScheme.outlineVariant),
+                            borderSide: BorderSide(
+                              color: colorScheme.outlineVariant,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24),

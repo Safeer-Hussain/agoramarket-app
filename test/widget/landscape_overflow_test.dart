@@ -11,12 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../mocks/mock_repositories.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Zero RenderFlex overflow errors on 800x360 landscape viewport', (tester) async {
+  testWidgets('Zero RenderFlex overflow errors on 800x360 landscape viewport', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(800, 360);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.resetPhysicalSize);
@@ -34,9 +37,15 @@ void main() {
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider(prefs: prefs)),
           ChangeNotifierProvider(create: (_) => RenderLatencyMonitor()),
-          ChangeNotifierProvider(create: (_) => VideoFeedProvider(repository: mockMarketplace)),
-          ChangeNotifierProvider(create: (_) => MapFilterProvider(repository: mockMarketplace)),
-          ChangeNotifierProvider(create: (_) => ChatProvider(repository: mockChat)),
+          ChangeNotifierProvider(
+            create: (_) => VideoFeedProvider(repository: mockMarketplace),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => MapFilterProvider(repository: mockMarketplace),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ChatProvider(repository: mockChat),
+          ),
           ChangeNotifierProvider(create: (_) => AiConciergeProvider()),
           ChangeNotifierProvider(
             create: (_) => ProfileProvider(
@@ -57,7 +66,9 @@ void main() {
     await tester.pump(const Duration(milliseconds: 200));
     expect(tester.takeException(), isNull);
 
-    final scaffoldState = tester.state<AdaptiveScaffoldState>(find.byType(AdaptiveScaffold));
+    final scaffoldState = tester.state<AdaptiveScaffoldState>(
+      find.byType(AdaptiveScaffold),
+    );
 
     // Verify Tab 1 (Map)
     scaffoldState.setDestination(1);

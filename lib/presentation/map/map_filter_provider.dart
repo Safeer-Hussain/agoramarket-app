@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../domain/entities/video_pitch.dart';
 import '../../domain/repositories/marketplace_repository.dart';
@@ -131,7 +132,8 @@ class MapFilterProvider extends ChangeNotifier {
     _filteredPitches = _allPitches.where((pitch) {
       if (_searchQuery.trim().isNotEmpty) {
         final q = _searchQuery.toLowerCase();
-        final match = pitch.title.toLowerCase().contains(q) ||
+        final match =
+            pitch.title.toLowerCase().contains(q) ||
             pitch.creatorName.toLowerCase().contains(q) ||
             pitch.role.toLowerCase().contains(q) ||
             pitch.locationName.toLowerCase().contains(q) ||
@@ -157,7 +159,9 @@ class MapFilterProvider extends ChangeNotifier {
     }).toList();
 
     if (_selectedPitch != null && !_filteredPitches.contains(_selectedPitch)) {
-      _selectedPitch = _filteredPitches.isNotEmpty ? _filteredPitches.first : null;
+      _selectedPitch = _filteredPitches.isNotEmpty
+          ? _filteredPitches.first
+          : null;
     }
   }
 }

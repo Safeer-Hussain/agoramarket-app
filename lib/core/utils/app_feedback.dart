@@ -78,10 +78,7 @@ class AppFeedback {
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(
-            color: colorScheme.outlineVariant,
-            width: 1,
-          ),
+          side: BorderSide(color: colorScheme.outlineVariant, width: 1),
         ),
         content: Row(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../domain/entities/video_pitch.dart';
 import '../../feed/widgets/hire_modal.dart';
 import '../map_filter_provider.dart';
@@ -23,7 +24,8 @@ class MapListingCard extends StatelessWidget {
     final travelEstimate = mapProvider.getTravelEstimate(pitch);
 
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin:
+          margin ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainer,
@@ -72,13 +74,20 @@ class MapListingCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 4),
-                              Icon(Icons.verified_rounded, size: 15, color: colorScheme.primary),
+                              Icon(
+                                Icons.verified_rounded,
+                                size: 15,
+                                color: colorScheme.primary,
+                              ),
                             ],
                           ),
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(6),
@@ -130,7 +139,11 @@ class MapListingCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.navigation_rounded, size: 14, color: colorScheme.primary),
+                Icon(
+                  Icons.navigation_rounded,
+                  size: 14,
+                  color: colorScheme.primary,
+                ),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -165,7 +178,10 @@ class MapListingCard extends StatelessWidget {
                 style: FilledButton.styleFrom(
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -181,27 +197,38 @@ class MapListingCard extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: colorScheme.onSurface,
                   side: BorderSide(
-                    color: mapProvider.showRoute ? colorScheme.primary : colorScheme.outlineVariant,
+                    color: mapProvider.showRoute
+                        ? colorScheme.primary
+                        : colorScheme.outlineVariant,
                   ),
                   backgroundColor: mapProvider.showRoute
                       ? colorScheme.primary.withValues(alpha: 0.1)
                       : Colors.transparent,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 onPressed: () => mapProvider.toggleRoute(),
                 icon: Icon(
-                  mapProvider.showRoute ? Icons.route_rounded : Icons.alt_route_rounded,
+                  mapProvider.showRoute
+                      ? Icons.route_rounded
+                      : Icons.alt_route_rounded,
                   size: 16,
-                  color: mapProvider.showRoute ? colorScheme.primary : colorScheme.onSurface,
+                  color: mapProvider.showRoute
+                      ? colorScheme.primary
+                      : colorScheme.onSurface,
                 ),
                 label: Text(
                   mapProvider.showRoute ? 'Route Active' : 'Pin Route',
                   style: TextStyle(
                     fontSize: 12,
-                    color: mapProvider.showRoute ? colorScheme.primary : colorScheme.onSurface,
+                    color: mapProvider.showRoute
+                        ? colorScheme.primary
+                        : colorScheme.onSurface,
                   ),
                 ),
               ),

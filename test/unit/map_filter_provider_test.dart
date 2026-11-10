@@ -1,5 +1,6 @@
 import 'package:agora_market_app/presentation/map/map_filter_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../mocks/mock_repositories.dart';
 
 void main() {
@@ -24,7 +25,10 @@ void main() {
 
       provider.setCategory('Freelancer');
       expect(provider.filteredPitches.length, 2);
-      expect(provider.filteredPitches.every((p) => p.category == 'Freelancer'), true);
+      expect(
+        provider.filteredPitches.every((p) => p.category == 'Freelancer'),
+        true,
+      );
 
       provider.setCategory('Agency');
       expect(provider.filteredPitches.length, 1);
@@ -36,7 +40,10 @@ void main() {
 
       provider.setMaxHourlyRate(100.0);
       expect(provider.filteredPitches.length, 2);
-      expect(provider.filteredPitches.every((p) => p.hourlyRate <= 100.0), true);
+      expect(
+        provider.filteredPitches.every((p) => p.hourlyRate <= 100.0),
+        true,
+      );
     });
 
     test('Search query matches title, creator name, and skills', () async {

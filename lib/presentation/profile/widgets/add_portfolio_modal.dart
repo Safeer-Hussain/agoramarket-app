@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../profile_provider.dart';
 
@@ -47,7 +48,10 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
     );
 
     Navigator.of(context).pop();
-    AppFeedback.showSuccess(context, 'Portfolio item added to verified showcase');
+    AppFeedback.showSuccess(
+      context,
+      'Portfolio item added to verified showcase',
+    );
   }
 
   @override
@@ -63,7 +67,9 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
           child: Container(
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainer,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
             ),
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: Form(
@@ -105,7 +111,10 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
                   const SizedBox(height: 6),
                   TextFormField(
                     controller: _titleController,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'e.g. 120 FPS Custom Canvas Telemetry Engine',
                     ),
@@ -136,8 +145,13 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
                             const SizedBox(height: 6),
                             TextFormField(
                               controller: _categoryController,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
-                              decoration: const InputDecoration(hintText: 'Architecture'),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
+                              decoration: const InputDecoration(
+                                hintText: 'Architecture',
+                              ),
                               validator: (v) {
                                 if (v == null || v.trim().isEmpty) {
                                   return 'Category is required';
@@ -164,8 +178,13 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
                             const SizedBox(height: 6),
                             TextFormField(
                               controller: _metricController,
-                              style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
-                              decoration: const InputDecoration(hintText: 'Sub-8ms frame time'),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 13,
+                              ),
+                              decoration: const InputDecoration(
+                                hintText: 'Sub-8ms frame time',
+                              ),
                               validator: (v) {
                                 if (v == null || v.trim().isEmpty) {
                                   return 'Key metric required';
@@ -193,7 +212,10 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
                   TextFormField(
                     controller: _descController,
                     maxLines: 3,
-                    style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontSize: 13,
+                    ),
                     decoration: const InputDecoration(
                       hintText: 'Detail architectural trade-offs, concurrency, and client impact',
                     ),
@@ -219,7 +241,10 @@ class _AddPortfolioModalState extends State<AddPortfolioModal> {
                         ),
                       ),
                       onPressed: _submit,
-                      child: const Text('Add to Showcase', style: TextStyle(fontWeight: FontWeight.w700)),
+                      child: const Text(
+                        'Add to Showcase',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../database/app_database.dart';
 import '../network/mock_api_interceptor.dart';
 import '../performance/render_latency_monitor.dart';
