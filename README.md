@@ -172,6 +172,17 @@ agora_market_app/
 
 ---
 
+## Continuous Integration & Quality Gates
+
+AgoraMarket employs GitHub Actions (`.github/workflows/ci.yml`) to enforce strict engineering quality standards on every commit and pull request against `main`:
+
+- **Flutter Setup**: Configured with `subosito/flutter-action@v2` targeting the official `stable` channel with artifact caching enabled.
+- **Zero-Warning Static Analysis**: Executes `flutter analyze --fatal-infos --fatal-warnings` to guarantee complete absence of linter hints, warnings, or deprecated API invocations.
+- **Automated Unit & Widget Test Suite**: Executes 100% of unit and widget tests covering responsive landscape viewports, Hero tags, accessibility semantics, and reactive provider states.
+- **LCOV Code Coverage Generation**: Automatically records code coverage to `coverage/lcov.info` and archives the report as a persistent build artifact.
+
+---
+
 ## Getting Started
 
 ### Prerequisites

@@ -20,7 +20,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          cache: false
+          cache: true
 
       - name: Verify Flutter Installation
         run: flutter --version
@@ -28,16 +28,25 @@ jobs:
       - name: Install Project Dependencies
         run: flutter pub get
 
-      - name: Static Analysis
-        run: flutter analyze
+      - name: Static Analysis (Zero Warning Tolerance)
+        run: flutter analyze --fatal-infos --fatal-warnings
 
       - name: Execute Automated Unit & Widget Test Suite
         run: flutter test --coverage
 
-      - name: Check Coverage Generation
+      - name: Verify Coverage File Generation
         run: |
           if [ -f coverage/lcov.info ]; then
             echo "Coverage file generated successfully."
           else
             echo "Coverage file not generated."
+            exit 1
           fi
+
+      - name: Upload Test Coverage Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lcov-coverage-report
+          path: coverage/lcov.info
+          if-no-files-found: warn
