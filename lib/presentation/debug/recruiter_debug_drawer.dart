@@ -45,6 +45,7 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
   }
 
   Future<void> _setLatency(double val) async {
+    if (!mounted) return;
     setState(() {
       _latency = val;
     });
@@ -53,6 +54,7 @@ class _RecruiterDebugDrawerState extends State<RecruiterDebugDrawer> {
   }
 
   Future<void> _toggle503(bool val) async {
+    if (!mounted) return;
     setState(() {
       _force503 = val;
     });

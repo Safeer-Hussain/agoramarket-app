@@ -5,9 +5,23 @@ import '../constants/app_constants.dart';
 class ThemeProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.dark;
   final SharedPreferences? prefs;
+  bool _disposed = false;
 
   ThemeProvider({this.prefs}) {
     _loadTheme();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 
   ThemeMode get themeMode => _themeMode;

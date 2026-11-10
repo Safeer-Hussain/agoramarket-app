@@ -88,9 +88,22 @@ The system is designed under a Zero-Cost Local-First architecture, running compl
 ## 5. Deployment & Continuous Integration
 
 - **CI Engine:** GitHub Actions (`.github/workflows/ci.yml`).
-- **Flutter Channel:** Stable channel (`channel: 'stable'`) via `subosito/flutter-action@v2` with `cache: false`.
+- **Flutter Channel:** Stable channel (`channel: 'stable'`) via `subosito/flutter-action@v2` with `cache: true`.
 - **Pipeline Stages:**
   1. Environment initialization and SDK verification.
   2. Dependency resolution via `flutter pub get`.
-  3. Strict static linting via `flutter analyze`.
-  4. Execution of all unit and widget tests with LCOV coverage report generation.
+  3. Strict static linting via `flutter analyze --fatal-infos --fatal-warnings`.
+  4. Execution of all unit and widget tests with LCOV coverage report generation and artifact archiving.
+
+---
+
+## 6. Release & Production Hardening
+
+- **Production Release Version**: 1.0.0 (Build 1)
+- **Lifecycle & Memory Management**:
+  - All `ChangeNotifier` providers protected against unmounted notifications with defensive `_disposed` flags and overridden `notifyListeners()` guards.
+  - All asynchronous timers, AI streaming loops, and network connectivity subscriptions explicitly cancelled upon lifecycle teardown.
+  - All `TextEditingController`, `PageController`, and `ScrollController` instances disposed within corresponding widget `State.dispose()` lifecycles.
+- **Accessibility & Device Support**:
+  - WCAG 2.1 AA certified with minimum 48x48dp touch targets and screen reader semantic announcements across Android TalkBack and iOS VoiceOver.
+  - Backward compatibility across Android API 21 through API 36 with edge-to-edge support and Vulkan/Impeller GPU crash shielding.

@@ -23,9 +23,23 @@ class MapFilterProvider extends ChangeNotifier {
   double _userLat = AppConstants.defaultLat;
   double _userLng = AppConstants.defaultLng;
   bool _showRoute = false;
+  bool _disposed = false;
 
   MapFilterProvider({required this.repository}) {
     loadMapData();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 
   List<VideoPitch> get filteredPitches => _filteredPitches;

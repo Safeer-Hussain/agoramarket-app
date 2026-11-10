@@ -21,6 +21,7 @@ class ProfileProvider extends ChangeNotifier {
   // Settings
   String _selectedCurrency = AppConstants.defaultCurrency;
   String _distanceUnit = 'km';
+  bool _disposed = false;
 
   ProfileProvider({
     required this.profileRepository,
@@ -29,6 +30,19 @@ class ProfileProvider extends ChangeNotifier {
   }) {
     _loadSettings();
     loadProfileData();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 
   UserProfile? get profile => _profile;

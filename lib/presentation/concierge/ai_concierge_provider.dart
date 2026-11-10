@@ -25,9 +25,23 @@ class AiConciergeProvider extends ChangeNotifier {
   bool _isLoading = false;
   String? _reasoningText;
   String _currentStreamingText = '';
+  bool _disposed = false;
 
   AiConciergeProvider({AppDatabase? database}) : _database = database ?? AppDatabase() {
     _initWelcome();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 
   List<ConciergeMessage> get messages => _messages;
@@ -72,16 +86,19 @@ class AiConciergeProvider extends ChangeNotifier {
       final contracts = await db.query('contract_offers');
 
       await Future.delayed(const Duration(milliseconds: 650));
+      if (_disposed) return;
       _reasoningText = 'Synthesizing benchmark telemetry across ${pitches.length} marketplace listings and ${contracts.length} escrow contracts...';
       notifyListeners();
 
       await Future.delayed(const Duration(milliseconds: 550));
+      if (_disposed) return;
       _reasoningText = null;
 
       final fullResponse = _generateResponse(query, pitches, contracts);
 
       final words = fullResponse.split(' ');
       for (int i = 0; i < words.length; i++) {
+        if (_disposed) return;
         _currentStreamingText += (i == 0 ? '' : ' ') + words[i];
         notifyListeners();
         await Future.delayed(const Duration(milliseconds: 28));

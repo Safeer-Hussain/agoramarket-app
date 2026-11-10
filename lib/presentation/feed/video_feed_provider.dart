@@ -20,9 +20,23 @@ class VideoFeedProvider extends ChangeNotifier {
   double _playbackProgress = 0.35;
 
   final Map<String, List<Comment>> _commentsCache = {};
+  bool _disposed = false;
 
   VideoFeedProvider({required this.repository}) {
     loadPitches();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 
   List<VideoPitch> get pitches => _pitches;

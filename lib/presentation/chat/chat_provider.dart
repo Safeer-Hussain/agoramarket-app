@@ -16,9 +16,25 @@ class ChatProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool _isTyping = false;
   String _searchFilter = '';
+  Timer? _peerReplyTimer;
+  bool _disposed = false;
 
   ChatProvider({required this.repository}) {
     loadConversations();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _peerReplyTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 
   List<ChatConversation> get conversations {
@@ -206,7 +222,8 @@ class ChatProvider extends ChangeNotifier {
     _isTyping = true;
     notifyListeners();
 
-    Timer(const Duration(milliseconds: 1400), () async {
+    _peerReplyTimer?.cancel();
+    _peerReplyTimer = Timer(const Duration(milliseconds: 1400), () async {
       try {
         if (_activeConversationId != conversationId) return;
 

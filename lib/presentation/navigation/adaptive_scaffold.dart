@@ -37,7 +37,7 @@ class AdaptiveScaffoldState extends State<AdaptiveScaffold> {
     _connectivitySub = Connectivity().onConnectivityChanged.listen((results) {
       final isDisconnected =
           results.isEmpty || results.every((r) => r == ConnectivityResult.none);
-      if (_isOffline != isDisconnected) {
+      if (_isOffline != isDisconnected && mounted) {
         setState(() {
           _isOffline = isDisconnected;
         });
