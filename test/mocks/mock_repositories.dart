@@ -178,6 +178,7 @@ class MockChatRepository implements ChatRepository {
   List<ChatConversation> conversations = [];
   Map<String, List<ChatMessage>> messages = {};
   Map<String, ContractOffer> contracts = {};
+  Map<String, EscrowDispute> disputes = {};
 
   MockChatRepository() {
     conversations = [
@@ -256,6 +257,40 @@ class MockChatRepository implements ChatRepository {
     final cur = contracts[contractId];
     if (cur != null) {
       contracts[contractId] = cur.copyWith(status: status);
+    }
+  }
+
+  @override
+  Future<void> submitDispute(EscrowDispute dispute) async {
+    disputes[dispute.contractId] = dispute;
+    final cur = contracts[dispute.contractId];
+    if (cur != null) {
+      contracts[dispute.contractId] = cur.copyWith(status: 'DISPUTED');
+    }
+  }
+
+  @override
+  Future<EscrowDispute?> getDisputeForContract(String contractId) async =>
+      disputes[contractId];
+
+  @override
+  Future<void> resolveDispute({
+    required String disputeId,
+    required String contractId,
+    required String resolutionStatus,
+    required String resolutionNotes,
+  }) async {
+    final curDisp = disputes[contractId];
+    if (curDisp != null) {
+      disputes[contractId] = curDisp.copyWith(
+        status: resolutionStatus,
+        resolutionNotes: resolutionNotes,
+        resolvedAt: DateTime.now().toIso8601String(),
+      );
+    }
+    final curContract = contracts[contractId];
+    if (curContract != null) {
+      contracts[contractId] = curContract.copyWith(status: 'RESOLVED');
     }
   }
 }

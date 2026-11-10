@@ -14,6 +14,7 @@ class ChatProvider extends ChangeNotifier {
   String? _activeConversationId;
   List<ChatMessage> _messages = [];
   final Map<String, ContractOffer> _contractsCache = {};
+  final Map<String, EscrowDispute> _disputesCache = {};
 
   bool _isLoading = false;
   bool _isTyping = false;
@@ -104,6 +105,12 @@ class ChatProvider extends ChangeNotifier {
           final offer = await repository.getContractOffer(msg.contractId!);
           if (offer != null) {
             _contractsCache[msg.contractId!] = offer;
+            final dispute = await repository.getDisputeForContract(
+              msg.contractId!,
+            );
+            if (dispute != null) {
+              _disputesCache[msg.contractId!] = dispute;
+            }
           }
         }
       }
@@ -213,6 +220,119 @@ class ChatProvider extends ChangeNotifier {
         notifyListeners();
         await repository.sendMessage(statusMsg);
       }
+    }
+  }
+
+  EscrowDispute? getDisputeForContract(String contractId) =>
+      _disputesCache[contractId];
+
+  Future<void> initiateDispute({
+    required String contractId,
+    required String reason,
+    required String evidenceNotes,
+    required double proposedRefundPercent,
+  }) async {
+    final contract = _contractsCache[contractId];
+    if (contract == null) return;
+
+    final disputeId = 'disp_${_uuid.v4().substring(0, 8)}';
+    final dispute = EscrowDispute(
+      id: disputeId,
+      contractId: contractId,
+      conversationId: contract.conversationId,
+      claimantName: 'Safeer Hussain',
+      reason: reason,
+      evidenceNotes: evidenceNotes,
+      claimAmount: contract.budget,
+      proposedRefundPercent: proposedRefundPercent,
+      status: 'OPEN',
+      resolutionNotes: 'Dispute submitted to AgoraMarket Decentralized Tribunal. Escrow funds locked.',
+      createdAt: DateTime.now().toIso8601String(),
+    );
+
+    _disputesCache[contractId] = dispute;
+    _contractsCache[contractId] = contract.copyWith(status: 'DISPUTED');
+    notifyListeners();
+
+    await repository.submitDispute(dispute);
+
+    if (_activeConversationId != null) {
+      final nowStr = 'Just now';
+      final refundAmount = (contract.budget * (proposedRefundPercent / 100.0))
+          .toStringAsFixed(0);
+      final disputeMsg = ChatMessage(
+        id: 'msg_${_uuid.v4()}',
+        conversationId: _activeConversationId!,
+        senderId: 'system',
+        senderName: 'AgoraMarket Tribunal',
+        text:
+            'Escrow Dispute Initiated for "${contract.title}". Reason: "$reason". Proposed resolution: \$$refundAmount (${proposedRefundPercent.toStringAsFixed(0)}%) refund. Milestone payout frozen until arbitration completes.',
+        timestamp: nowStr,
+        isContract: false,
+      );
+      _messages.add(disputeMsg);
+      _updateLastConversationMessage(
+        _activeConversationId!,
+        'Tribunal: Dispute Opened ($reason)',
+        nowStr,
+      );
+      notifyListeners();
+      await repository.sendMessage(disputeMsg);
+    }
+  }
+
+  Future<void> resolveDispute({
+    required String contractId,
+    required String resolutionStatus,
+    required String resolutionNotes,
+  }) async {
+    final dispute = _disputesCache[contractId];
+    final contract = _contractsCache[contractId];
+    if (dispute == null || contract == null) return;
+
+    final nowStr = DateTime.now().toIso8601String();
+    final updatedDispute = dispute.copyWith(
+      status: resolutionStatus,
+      resolutionNotes: resolutionNotes,
+      resolvedAt: nowStr,
+    );
+
+    _disputesCache[contractId] = updatedDispute;
+    _contractsCache[contractId] = contract.copyWith(status: 'RESOLVED');
+    notifyListeners();
+
+    await repository.resolveDispute(
+      disputeId: dispute.id,
+      contractId: contractId,
+      resolutionStatus: resolutionStatus,
+      resolutionNotes: resolutionNotes,
+    );
+
+    if (_activeConversationId != null) {
+      final resolutionSummary = resolutionStatus == 'RESOLVED_SPLIT'
+          ? '50/50 Mutual Compromise Settlement'
+          : resolutionStatus == 'RESOLVED_REFUND'
+          ? '100% Full Refund Issued to Client'
+          : '100% Milestone Release Paid to Talent';
+
+      final resolutionMsg = ChatMessage(
+        id: 'msg_${_uuid.v4()}',
+        conversationId: _activeConversationId!,
+        senderId: 'system',
+        senderName: 'AgoraMarket Tribunal',
+        text:
+            'Arbitration Ruling Issued for "${contract.title}": $resolutionSummary. Notes: $resolutionNotes. Escrow disbursed according to protocol ruling.',
+        timestamp: 'Just now',
+        isContract: false,
+      );
+      _messages.add(resolutionMsg);
+      _updateLastConversationMessage(
+        _activeConversationId!,
+        'Tribunal Ruling: $resolutionSummary',
+        'Just now',
+      );
+      notifyListeners();
+      await repository.sendMessage(resolutionMsg);
     }
   }
 

@@ -78,6 +78,58 @@ void main() {
       expect(updatedOffer?.status, 'ACCEPTED');
     });
 
+    test('initiateDispute creates EscrowDispute and transitions contract to DISPUTED', () async {
+      await provider.loadConversations();
+      const contractId = 'contract_01';
+      await provider.updateContractStatus(contractId, 'ACCEPTED');
+
+      await provider.initiateDispute(
+        contractId: contractId,
+        reason: 'Milestone Deliverable Incomplete',
+        evidenceNotes: 'Missing automated unit tests and benchmark suite.',
+        proposedRefundPercent: 50.0,
+      );
+
+      final updatedOffer = provider.getContractOffer(contractId);
+      expect(updatedOffer?.status, 'DISPUTED');
+
+      final dispute = provider.getDisputeForContract(contractId);
+      expect(dispute != null, true);
+      expect(dispute?.reason, 'Milestone Deliverable Incomplete');
+      expect(dispute?.proposedRefundPercent, 50.0);
+      expect(dispute?.status, 'OPEN');
+    });
+
+    test('resolveDispute enforces binding settlement and transitions contract to RESOLVED', () async {
+      await provider.loadConversations();
+      const contractId = 'contract_01';
+      await provider.updateContractStatus(contractId, 'ACCEPTED');
+
+      await provider.initiateDispute(
+        contractId: contractId,
+        reason: 'Specification Scope Drift',
+        evidenceNotes: 'Scope deviation in video player canvas.',
+        proposedRefundPercent: 50.0,
+      );
+
+      await provider.resolveDispute(
+        contractId: contractId,
+        resolutionStatus: 'RESOLVED_SPLIT',
+        resolutionNotes: 'Mutual 50/50 compromise settlement approved.',
+      );
+
+      final updatedOffer = provider.getContractOffer(contractId);
+      expect(updatedOffer?.status, 'RESOLVED');
+
+      final dispute = provider.getDisputeForContract(contractId);
+      expect(dispute?.status, 'RESOLVED_SPLIT');
+      expect(
+        dispute?.resolutionNotes,
+        'Mutual 50/50 compromise settlement approved.',
+      );
+      expect(dispute?.resolvedAt != null, true);
+    });
+
     test(
       'isTyping indicator simulation resets cleanly inside try-finally',
       () async {

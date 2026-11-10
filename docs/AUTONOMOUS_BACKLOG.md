@@ -157,3 +157,79 @@
 - Update architecture documentation and sequence diagrams in `README.md`.
 - Conduct memory leak profiling and unmounted provider audit.
 - Deliverable: Production-ready AgoraMarket release tag on GitHub.
+
+### [x] Sprint 26: Milestone Escrow Dispute & Resolution Tribunal
+- Implement structured dispute arbitration system within `ChatProvider` & `AppDatabase`.
+- Add evidence submission model (evidence descriptions, claim reason, contract logs, delivery hashes).
+- Create `DisputeResolutionModal` and `ArbitrationStatusBanner` with refund vs payout allocation sliders.
+- Deliverable: End-to-end escrow dispute resolution workflow with SQLite audit trail.
+
+### [ ] Sprint 27: Multi-Currency Dynamic Peg & Hedging Calculator
+- Extend pricing engine to support live conversions across USD, PKR, EUR, GBP, AED, and SAR with offline fixed peg tables.
+- Build interactive `CurrencyHedgingCalculator` in Profile showing estimated FX volatility and payout projections.
+- Deliverable: Reactive multi-currency switcher updating all feed cards, proposal modals, and invoices.
+
+### [ ] Sprint 28: Interactive Talent Availability Scheduler & Booking Calendar
+- Implement SQLite table `talent_bookings` with time slots, consultation types, and duration.
+- Build custom canvas month/week calendar view with touch selection and conflict detection.
+- Deliverable: Offline appointment booking engine with instant message thread notification.
+
+### [ ] Sprint 29: Video Pitch Bookmark Collections & Tagging Taxonomy
+- Add custom collection folders in `VideoFeedProvider` (e.g., Mobile Architects, Fintech Experts, Backend Leads).
+- Build collection management drawer with drag-and-drop ordering and tag filtering.
+- Deliverable: Multi-folder bookmarking system persisted to SQLite relational tables.
+
+### [ ] Sprint 30: Advanced Spatial Geofencing & Tech Corridor Clustering
+- Enhance `TalentMapView` with cluster markers when zoomed out to prevent canvas clutter.
+- Define named tech corridors (Lahore IT Park, Gulberg Main Blvd, DHA Phase 5 Commercial, Arfa Tower).
+- Deliverable: High-performance geospatial clustering algorithm running on 60 FPS map canvas.
+
+### [ ] Sprint 31: On-Device Voice Pitch Synthesizer & Speech Telemetry
+- Implement waveform audio player visualization component with custom audio scrubber.
+- Add voice pitch transcription viewer synchronized with reel playback timing.
+- Deliverable: Interactive synchronized transcript HUD for video pitches.
+
+### [ ] Sprint 32: Contract PDF & Invoice Receipt Generator
+- Build on-device structured invoice export engine for completed escrow milestones.
+- Create `InvoiceReceiptView` displaying tax breakdown, escrow fee calculations, and transaction hash.
+- Deliverable: One-tap invoice export and shareable receipt sheet.
+
+### [ ] Sprint 33: Creator Skill Verification & Technical Assessment Badges
+- Build verification badge hierarchy (Verified Contributor, Top 1% Architect, Security Audited).
+- Implement skill endorsement counter in `UserProfileView` with SQLite storage.
+- Deliverable: Interactive credential drawer displaying verifiable competency criteria.
+
+### [ ] Sprint 34: Network Bandwidth Adaptive Video Quality Profiler
+- Simulate low-bandwidth (2G/3G/4G/WiFi) video reel degradation and adaptive bitrate switching.
+- Add data saver mode toggle in settings reducing canvas render complexity when offline or throttled.
+- Deliverable: Dynamic frame throttler maintaining smooth 60-120 FPS on constrained devices.
+
+### [ ] Sprint 35: Global Search & Omnibox Filter Architecture
+- Build unified search modal querying across Pitches, Talent, Conversations, and Skills simultaneously.
+- Implement SQLite FTS (Full-Text Search) simulation with fuzzy token matching and search history chips.
+- Deliverable: Instant sub-5ms unified omnibox search with highlighting.
+
+### [ ] Sprint 36: Two-Factor Mock Security & Biometric Lock Gate
+- Implement biometric auth simulator (`LocalAuthGate`) for escrow contract disbursements.
+- Add secure PIN lock view guarding the Recruiter Debug Drawer and wallet balances.
+- Deliverable: Zero-friction authentication gate safeguarding high-value actions.
+
+### [ ] Sprint 37: Real-Time Notification Center & Activity Feed
+- Create `NotificationProvider` and interactive notification drawer with filter tabs (All, Contracts, Messages, Likes).
+- Implement badge counter on bottom navigation and notification toast dispatcher.
+- Deliverable: Reactive notification center with clear all and mark-as-read actions.
+
+### [ ] Sprint 38: Client Review & Multi-Dimensional Feedback Matrix
+- Create SQLite table `client_reviews` with rating dimensions (Communication, Code Quality, Delivery Speed).
+- Build `SubmitReviewModal` and interactive breakdown chart in user profile.
+- Deliverable: Comprehensive multi-dimensional client review system.
+
+### [ ] Sprint 39: Automated Snapshot & Golden File Regression Testing
+- Build golden test suite validating pixel-level rendering of `VideoReelCanvas` and HUD elements.
+- Verify layout stability across multiple device resolutions (Phone, Tablet, Desktop).
+- Deliverable: Automated visual regression verification pipeline.
+
+### [ ] Sprint 40: Multi-Language Internationalization (i18n) Engine
+- Build zero-dependency i18n translation system supporting English and Urdu (Nastaliq RTL layout support).
+- Implement bidirectional layout mirroring in `AdaptiveScaffold` and directionality controllers.
+- Deliverable: Seamless on-the-fly language switching with complete RTL text parity.

@@ -75,4 +75,58 @@ class ChatRepositoryImpl implements ChatRepository {
       whereArgs: [contractId],
     );
   }
+
+  @override
+  Future<void> submitDispute(EscrowDispute dispute) async {
+    final db = await _database.database;
+    await db.insert('escrow_disputes', dispute.toMap());
+    await db.update(
+      'contract_offers',
+      {'status': 'DISPUTED'},
+      where: 'id = ?',
+      whereArgs: [dispute.contractId],
+    );
+  }
+
+  @override
+  Future<EscrowDispute?> getDisputeForContract(String contractId) async {
+    final db = await _database.database;
+    final rows = await db.query(
+      'escrow_disputes',
+      where: 'contract_id = ?',
+      whereArgs: [contractId],
+      orderBy: 'created_at DESC',
+      limit: 1,
+    );
+    if (rows.isEmpty) return null;
+    return EscrowDispute.fromMap(rows.first);
+  }
+
+  @override
+  Future<void> resolveDispute({
+    required String disputeId,
+    required String contractId,
+    required String resolutionStatus,
+    required String resolutionNotes,
+  }) async {
+    final db = await _database.database;
+    final now = DateTime.now().toIso8601String();
+    await db.update(
+      'escrow_disputes',
+      {
+        'status': resolutionStatus,
+        'resolution_notes': resolutionNotes,
+        'resolved_at': now,
+      },
+      where: 'id = ?',
+      whereArgs: [disputeId],
+    );
+
+    await db.update(
+      'contract_offers',
+      {'status': 'RESOLVED'},
+      where: 'id = ?',
+      whereArgs: [contractId],
+    );
+  }
 }

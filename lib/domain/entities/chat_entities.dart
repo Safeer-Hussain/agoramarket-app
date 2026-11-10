@@ -213,3 +213,99 @@ class ContractOffer {
     );
   }
 }
+
+class EscrowDispute {
+  final String id;
+  final String contractId;
+  final String conversationId;
+  final String claimantName;
+  final String reason;
+  final String evidenceNotes;
+  final double claimAmount;
+  final double proposedRefundPercent; // 0.0 to 100.0
+  final String
+  status; // 'OPEN', 'RESOLVED_SPLIT', 'RESOLVED_REFUND', 'RESOLVED_PAYOUT'
+  final String resolutionNotes;
+  final String createdAt;
+  final String? resolvedAt;
+
+  const EscrowDispute({
+    required this.id,
+    required this.contractId,
+    required this.conversationId,
+    required this.claimantName,
+    required this.reason,
+    required this.evidenceNotes,
+    required this.claimAmount,
+    required this.proposedRefundPercent,
+    required this.status,
+    required this.resolutionNotes,
+    required this.createdAt,
+    this.resolvedAt,
+  });
+
+  EscrowDispute copyWith({
+    String? id,
+    String? contractId,
+    String? conversationId,
+    String? claimantName,
+    String? reason,
+    String? evidenceNotes,
+    double? claimAmount,
+    double? proposedRefundPercent,
+    String? status,
+    String? resolutionNotes,
+    String? createdAt,
+    String? resolvedAt,
+  }) {
+    return EscrowDispute(
+      id: id ?? this.id,
+      contractId: contractId ?? this.contractId,
+      conversationId: conversationId ?? this.conversationId,
+      claimantName: claimantName ?? this.claimantName,
+      reason: reason ?? this.reason,
+      evidenceNotes: evidenceNotes ?? this.evidenceNotes,
+      claimAmount: claimAmount ?? this.claimAmount,
+      proposedRefundPercent:
+          proposedRefundPercent ?? this.proposedRefundPercent,
+      status: status ?? this.status,
+      resolutionNotes: resolutionNotes ?? this.resolutionNotes,
+      createdAt: createdAt ?? this.createdAt,
+      resolvedAt: resolvedAt ?? this.resolvedAt,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'contract_id': contractId,
+      'conversation_id': conversationId,
+      'claimant_name': claimantName,
+      'reason': reason,
+      'evidence_notes': evidenceNotes,
+      'claim_amount': claimAmount,
+      'proposed_refund_percent': proposedRefundPercent,
+      'status': status,
+      'resolution_notes': resolutionNotes,
+      'created_at': createdAt,
+      'resolved_at': resolvedAt,
+    };
+  }
+
+  factory EscrowDispute.fromMap(Map<String, dynamic> map) {
+    return EscrowDispute(
+      id: map['id'] as String,
+      contractId: map['contract_id'] as String,
+      conversationId: map['conversation_id'] as String,
+      claimantName: map['claimant_name'] as String,
+      reason: map['reason'] as String,
+      evidenceNotes: map['evidence_notes'] as String,
+      claimAmount: (map['claim_amount'] as num).toDouble(),
+      proposedRefundPercent: (map['proposed_refund_percent'] as num).toDouble(),
+      status: map['status'] as String,
+      resolutionNotes: map['resolution_notes'] as String,
+      createdAt: map['created_at'] as String,
+      resolvedAt: map['resolved_at'] as String?,
+    );
+  }
+}

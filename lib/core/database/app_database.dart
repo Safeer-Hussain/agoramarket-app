@@ -44,7 +44,27 @@ class AppDatabase {
       dbPath,
       version: AppConstants.dbVersion,
       onCreate: _onCreate,
+      onOpen: _ensureTables,
     );
+  }
+
+  Future<void> _ensureTables(Database db) async {
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS escrow_disputes (
+        id TEXT PRIMARY KEY,
+        contract_id TEXT NOT NULL,
+        conversation_id TEXT NOT NULL,
+        claimant_name TEXT NOT NULL,
+        reason TEXT NOT NULL,
+        evidence_notes TEXT NOT NULL,
+        claim_amount REAL NOT NULL,
+        proposed_refund_percent REAL NOT NULL,
+        status TEXT NOT NULL,
+        resolution_notes TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        resolved_at TEXT
+      )
+    ''');
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -150,6 +170,23 @@ class AppDatabase {
         category TEXT NOT NULL,
         metric TEXT NOT NULL,
         thumbnail_asset TEXT NOT NULL
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE escrow_disputes (
+        id TEXT PRIMARY KEY,
+        contract_id TEXT NOT NULL,
+        conversation_id TEXT NOT NULL,
+        claimant_name TEXT NOT NULL,
+        reason TEXT NOT NULL,
+        evidence_notes TEXT NOT NULL,
+        claim_amount REAL NOT NULL,
+        proposed_refund_percent REAL NOT NULL,
+        status TEXT NOT NULL,
+        resolution_notes TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        resolved_at TEXT
       )
     ''');
 
