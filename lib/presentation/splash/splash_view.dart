@@ -18,7 +18,7 @@ class _SplashViewState extends State<SplashView>
   late AnimationController _animController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
-  String _statusText = 'Initializing sub-second frame pre-cache...';
+  String _statusText = 'Initializing sub-second frame pre-cache..';
 
   @override
   void initState() {
