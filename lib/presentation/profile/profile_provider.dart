@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/currency_converter.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../domain/entities/video_pitch.dart';
 import '../../domain/repositories/profile_repository.dart';
@@ -52,6 +53,8 @@ class ProfileProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String get selectedCurrency => _selectedCurrency;
   String get distanceUnit => _distanceUnit;
+  List<String> get supportedCurrencies =>
+      CurrencyConverter.currencies.keys.toList();
 
   void _loadSettings() {
     final localPrefs = prefs;
@@ -62,15 +65,23 @@ class ProfileProvider extends ChangeNotifier {
     _distanceUnit = localPrefs.getString(AppConstants.prefDistanceUnit) ?? 'km';
   }
 
-  Future<void> toggleCurrency() async {
-    _selectedCurrency = (_selectedCurrency == AppConstants.defaultCurrency)
-        ? AppConstants.altCurrency
-        : AppConstants.defaultCurrency;
+  Future<void> setCurrency(String currencyCode) async {
+    if (!CurrencyConverter.currencies.containsKey(currencyCode)) return;
+    _selectedCurrency = currencyCode;
     notifyListeners();
     final localPrefs = prefs;
     if (localPrefs != null) {
       await localPrefs.setString(AppConstants.prefCurrency, _selectedCurrency);
     }
+  }
+
+  Future<void> toggleCurrency() async {
+    final list = supportedCurrencies;
+    final currentIndex = list.indexOf(_selectedCurrency);
+    final nextIndex = (currentIndex == -1)
+        ? 0
+        : (currentIndex + 1) % list.length;
+    await setCurrency(list[nextIndex]);
   }
 
   Future<void> toggleDistanceUnit() async {

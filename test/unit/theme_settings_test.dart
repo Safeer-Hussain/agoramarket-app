@@ -34,7 +34,7 @@ void main() {
       },
     );
 
-    test('ProfileProvider toggles currency USD/PKR and persists', () async {
+    test('ProfileProvider toggles currency across supported currencies and persists', () async {
       final mockProfileRepo = MockProfileRepository();
       final mockMarketplaceRepo = MockMarketplaceRepository();
       final profileProvider = ProfileProvider(
@@ -50,7 +50,12 @@ void main() {
       expect(prefs.getString(AppConstants.prefCurrency), 'PKR');
 
       await profileProvider.toggleCurrency();
+      expect(profileProvider.selectedCurrency, 'EUR');
+      expect(prefs.getString(AppConstants.prefCurrency), 'EUR');
+
+      await profileProvider.setCurrency('USD');
       expect(profileProvider.selectedCurrency, 'USD');
+      expect(prefs.getString(AppConstants.prefCurrency), 'USD');
     });
 
     test('ProfileProvider toggles distance unit km/mi and persists', () async {

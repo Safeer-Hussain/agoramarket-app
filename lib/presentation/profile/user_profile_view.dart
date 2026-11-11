@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/utils/app_feedback.dart';
+import '../../core/utils/currency_converter.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../domain/entities/video_pitch.dart';
 import 'profile_provider.dart';
 import 'widgets/add_portfolio_modal.dart';
+import 'widgets/currency_hedging_modal.dart';
 import 'widgets/edit_profile_modal.dart';
 import 'widgets/performance_analytics_card.dart';
 import 'widgets/settings_sheet.dart';
@@ -46,6 +48,11 @@ class UserProfileView extends StatelessWidget {
               ),
             ),
             actions: [
+              IconButton(
+                icon: const Icon(Icons.currency_exchange_rounded, size: 20),
+                tooltip: 'FX Hedging & Currency Calculator',
+                onPressed: () => CurrencyHedgingModal.show(context),
+              ),
               IconButton(
                 icon: const Icon(Icons.edit_outlined, size: 20),
                 tooltip: 'Edit Profile',
@@ -301,7 +308,8 @@ class UserProfileView extends StatelessWidget {
                 context,
                 icon: Icons.payments_outlined,
                 iconColor: colorScheme.secondary,
-                label: '\$${profile.hourlyRate.toStringAsFixed(0)}/hr',
+                label:
+                    '${CurrencyConverter.format(profile.hourlyRate, provider.selectedCurrency)}/hr',
               ),
             ],
           ),

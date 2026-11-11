@@ -164,7 +164,7 @@
 - Create `DisputeResolutionModal` and `ArbitrationStatusBanner` with refund vs payout allocation sliders.
 - Deliverable: End-to-end escrow dispute resolution workflow with SQLite audit trail.
 
-### [ ] Sprint 27: Multi-Currency Dynamic Peg & Hedging Calculator
+### [x] Sprint 27: Multi-Currency Dynamic Peg & Hedging Calculator
 - Extend pricing engine to support live conversions across USD, PKR, EUR, GBP, AED, and SAR with offline fixed peg tables.
 - Build interactive `CurrencyHedgingCalculator` in Profile showing estimated FX volatility and payout projections.
 - Deliverable: Reactive multi-currency switcher updating all feed cards, proposal modals, and invoices.

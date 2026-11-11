@@ -4,6 +4,7 @@ import 'package:agora_market_app/domain/entities/chat_entities.dart';
 import 'package:agora_market_app/presentation/chat/chat_provider.dart';
 import 'package:agora_market_app/presentation/chat/widgets/contract_proposal_card.dart';
 import 'package:agora_market_app/presentation/chat/widgets/dispute_resolution_modal.dart';
+import 'package:agora_market_app/presentation/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,12 @@ void main() {
               create: (_) => ThemeProvider(),
             ),
             ChangeNotifierProvider<ChatProvider>.value(value: chatProvider),
+            ChangeNotifierProvider<ProfileProvider>(
+              create: (_) => ProfileProvider(
+                profileRepository: MockProfileRepository(),
+                marketplaceRepository: MockMarketplaceRepository(),
+              ),
+            ),
           ],
           child: MaterialApp(
             theme: AppTheme.darkTheme,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/utils/currency_converter.dart';
 import '../../../domain/entities/video_pitch.dart';
+import '../../profile/profile_provider.dart';
 import '../video_feed_provider.dart';
 import 'comment_sheet.dart';
 import 'share_sheet.dart';
@@ -143,13 +145,17 @@ class VideoOverlayHud extends StatelessWidget {
                             color: colorScheme.secondary,
                           ),
                           const SizedBox(width: 4),
-                          Text(
-                            '\$${pitch.hourlyRate.toStringAsFixed(0)}/hr',
-                            style: TextStyle(
-                              color: colorScheme.onSurface,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                            ),
+                          Consumer<ProfileProvider>(
+                            builder: (context, profileProvider, _) {
+                              return Text(
+                                '${CurrencyConverter.format(pitch.hourlyRate, profileProvider.selectedCurrency)}/hr',
+                                style: TextStyle(
+                                  color: colorScheme.onSurface,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

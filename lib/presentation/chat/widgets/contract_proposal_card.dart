@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/app_feedback.dart';
+import '../../../core/utils/currency_converter.dart';
 import '../../../domain/entities/chat_entities.dart';
+import '../../profile/profile_provider.dart';
 import '../chat_provider.dart';
 import 'arbitration_resolution_modal.dart';
 import 'dispute_resolution_modal.dart';
@@ -35,7 +36,19 @@ class ContractProposalCard extends StatelessWidget {
       statusColor = colorScheme.secondary;
     }
 
-    final pkrEquivalent = offer.budget * AppConstants.pkrConversionRate;
+    String activeCurrency = 'PKR';
+    try {
+      final profileProvider = Provider.of<ProfileProvider>(context);
+      activeCurrency = profileProvider.selectedCurrency;
+    } catch (_) {
+      activeCurrency = 'PKR';
+    }
+
+    final convertedDisplay = (offer.currency == activeCurrency)
+        ? (activeCurrency == 'PKR'
+              ? CurrencyConverter.format(offer.budget, 'USD')
+              : CurrencyConverter.format(offer.budget, 'PKR'))
+        : CurrencyConverter.format(offer.budget, activeCurrency);
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -140,7 +153,7 @@ class ContractProposalCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '~ PKR ${pkrEquivalent.toStringAsFixed(0)}',
+                        '~ $convertedDisplay',
                         style: TextStyle(
                           fontSize: 9,
                           color: colorScheme.onSurfaceVariant,

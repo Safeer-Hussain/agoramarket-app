@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../../core/utils/currency_converter.dart';
 import '../../debug/recruiter_debug_drawer.dart';
 import '../profile_provider.dart';
+import 'currency_hedging_modal.dart';
 
 class SettingsSheet extends StatelessWidget {
   const SettingsSheet({super.key});
@@ -86,15 +88,89 @@ class SettingsSheet extends StatelessWidget {
             ),
             const Divider(height: 16),
 
-            // Currency Switch
+            // Multi-Currency Peg Switch
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.currency_exchange_rounded,
+                          color: colorScheme.secondary,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Marketplace Currency Peg',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      profileProvider.selectedCurrency,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Select settlement currency across 6 dynamic offline currency pegs',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: CurrencyConverter.currencies.keys.map((code) {
+                    final isSel = profileProvider.selectedCurrency == code;
+                    final info = CurrencyConverter.currencies[code]!;
+                    return ChoiceChip(
+                      label: Text(
+                        '$code ${info.symbol.trim()}',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: isSel ? FontWeight.bold : FontWeight.w500,
+                          color: isSel
+                              ? colorScheme.onPrimary
+                              : colorScheme.onSurface,
+                        ),
+                      ),
+                      selected: isSel,
+                      selectedColor: colorScheme.primary,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      onSelected: (val) {
+                        if (val) profileProvider.setCurrency(code);
+                      },
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            // Currency Hedging & Forward FX Calculator
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(
-                Icons.currency_exchange_rounded,
-                color: colorScheme.secondary,
+                Icons.analytics_outlined,
+                color: colorScheme.tertiary,
               ),
               title: Text(
-                'Primary Currency',
+                'FX Hedging & Volatility Calculator',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -102,18 +178,18 @@ class SettingsSheet extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                'Toggle between USD and Pakistani Rupee (PKR)',
+                'Simulate forward contracts and currency risk mitigation',
                 style: TextStyle(
                   fontSize: 11,
                   color: colorScheme.onSurfaceVariant,
                 ),
               ),
-              trailing: FilledButton.tonal(
-                onPressed: () => profileProvider.toggleCurrency(),
-                child: Text(
-                  profileProvider.selectedCurrency,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
+              trailing: IconButton(
+                icon: const Icon(Icons.chevron_right_rounded),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  CurrencyHedgingModal.show(context);
+                },
               ),
             ),
             const Divider(height: 16),
